@@ -12,7 +12,7 @@ class SlideFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Slide ' . self::$order++,
+            'title' => 'Slide ' . self::$order++,
         ];
     }
 

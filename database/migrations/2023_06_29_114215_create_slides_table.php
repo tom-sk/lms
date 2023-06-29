@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
+            $table->string('title');
             $table->integer('sort_order')->nullable();
             $table->unsignedBiginteger('topic_id')->nullable();
         });

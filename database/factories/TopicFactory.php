@@ -12,7 +12,7 @@ class TopicFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Topic ' . self::$order++,
+            'title' => 'Topic ' . self::$order++,
         ];
     }
 

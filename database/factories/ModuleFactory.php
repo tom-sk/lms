@@ -12,7 +12,7 @@ class ModuleFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Module ' . self::$order++,
+            'title' => 'Module ' . self::$order++,
         ];
     }
 }
