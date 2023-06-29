@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ModuleController extends Controller
 {
@@ -52,7 +54,11 @@ class ModuleController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //
+        $user = Auth::user();
+
+        $user->modules()->save($module);
+
+        return to_route('dashboard');
     }
 
     /**

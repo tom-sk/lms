@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_module', function (Blueprint $table) {
+        Schema::create('module_user', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBiginteger('user_id')->unsigned();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_module');
+        Schema::dropIfExists('module_user');
     }
 };

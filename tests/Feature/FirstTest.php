@@ -4,7 +4,18 @@ use App\Models\User;
 use Inertia\Testing\AssertableInertia;
 use function Pest\Faker\fake;
 
-test('has first page', function () {
+test('user can access register page', function (){
+    $this->get(route('register'))
+        ->assertOk()
+        ->assertInertia(
+            fn (AssertableInertia $page) => $page
+                ->component('Auth/Register')
+                ->has('errors')
+                ->where('errors', [])
+        );
+});
+
+test('user can register', function () {
     $this->get(route('register'));
 
     $this
