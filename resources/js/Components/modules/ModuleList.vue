@@ -1,5 +1,6 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 defineProps({
     modules: {
@@ -37,13 +38,14 @@ function submit(id) {
                         Enrol
                     </button>
                 </form>
-                <button
-                    v-else
-                    type="button"
-                    class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                    Start
-                </button>
+                <Link v-else :href="route('module', module.id)">
+                    <button
+                        type="button"
+                        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        Start
+                    </button>
+                </Link>
             </div>
         </div>
     </div>

@@ -38,7 +38,10 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
-        //
+        return Inertia::render('Module/index', [
+            'module' => $module,
+            'topics' => $module->topics()->get()
+        ]);
     }
 
     /**

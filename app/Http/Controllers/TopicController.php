@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TopicController extends Controller
 {
@@ -34,9 +36,17 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Topic $topic)
+    public function show(Module $module, Topic $topic)
     {
-        //
+        $slide = $topic->slides()->first();
+
+        return Inertia::render('Topic/index', [
+            'module' => $module,
+            'topic' => $topic,
+            'topics' => $module->topics()->get(),
+            'slide' => $slide,
+            'slides' => $topic->slides()->get(),
+        ]);
     }
 
     /**

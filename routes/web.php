@@ -3,6 +3,7 @@
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/enrol/{module}', [ModuleController::class, 'update'])->name('module.enrol');
+    Route::get('/module/{module}', [ModuleController::class, 'show'])->name('module');
+    Route::get('/module/{module}/topic/{topic}', [TopicController::class, 'show'])->name('module.topics');
 });
 
 require __DIR__.'/auth.php';

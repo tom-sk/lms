@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Inertia\Testing\AssertableInertia;
 use function Pest\Faker\fake;
 
