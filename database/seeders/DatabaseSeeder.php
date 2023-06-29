@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Module;
+use App\Models\Slide;
+use App\Models\Topic;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $factory = new UserFactory();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $factory->createUser('thomasscullyking@hotmail.com', 1);
+
+        Module::factory()
+            ->count(6)
+            ->has(
+                Topic::factory()
+                    ->count(3)
+                    ->has(
+                        Slide::factory()
+                            ->count(3)
+                    )
+            )
+            ->create();
     }
 }
