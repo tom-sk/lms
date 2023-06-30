@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+use function Pest\Laravel\json;
 
 class SlideController extends Controller
 {
@@ -36,7 +39,9 @@ class SlideController extends Controller
      */
     public function show(Slide $slide)
     {
-        //
+       return response()->json([
+            'message' => 'hello'
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -52,7 +57,14 @@ class SlideController extends Controller
      */
     public function update(Request $request, Slide $slide)
     {
-        //
+
+        $user = Auth::user();
+
+        $user->slides()->save($slide);
+
+        return response()->json([
+            'message' => 'hello'
+        ], Response::HTTP_OK);
     }
 
     /**

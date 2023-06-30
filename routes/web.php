@@ -3,6 +3,7 @@
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SlideController;
 use App\Http\Controllers\TopicController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,5 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/module/{module}', [ModuleController::class, 'show'])->name('module');
     Route::get('/module/{module}/topic/{topic}', [TopicController::class, 'show'])->name('module.topics');
 });
+
+
+
 
 require __DIR__.'/auth.php';

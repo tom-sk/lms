@@ -13,6 +13,11 @@ class Topic extends Model
     use HasFactory;
     use HasRunwayResource;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function modules(): BelongsToMany
     {
         return $this->belongsToMany(Module::class)->using(ModuleTopic::class);;

@@ -50,5 +50,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Module::class);
     }
 
-
+    public function slides(): BelongsToMany
+    {
+        return $this->belongsToMany(Slide::class);
+    }
 }

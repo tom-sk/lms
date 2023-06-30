@@ -10,6 +10,7 @@ import {
     TransitionRoot,
 } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
+import TopicSlide from "@/Components/slide/TopicSlide.vue";
 
 const props = defineProps({
     module: {
@@ -33,12 +34,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-const count = ref(0);
-
-const add = () => {
-    count.value++;
-};
 
 const sidebarOpen = ref(false);
 const slideId = ref(props.slide.id);
@@ -234,14 +229,13 @@ const activeSlide = computed(() => {
             <div class="grid grid-cols-2 xl:pl-0">
                 <div class="bg-blue-200 px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
                     <!-- Main area -->
-                    {{ activeSlide }}
+                    <TopicSlide
+                        :slide="activeSlide"
+                        :slides="slides"
+                        @set-slide="setSlide"
+                    />
                 </div>
-                <div>
-                    Second
-                    {{ count }}
-
-                    <div @click="add">increase count</div>
-                </div>
+                <div>Resources</div>
             </div>
         </main>
     </div>
