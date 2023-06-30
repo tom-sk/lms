@@ -57,10 +57,15 @@ class SlideController extends Controller
      */
     public function update(Request $request, Slide $slide)
     {
-
         $user = Auth::user();
 
-        $user->slides()->save($slide);
+        if($request->slide_complete === true) {
+            $data = [$slide->id => ['slide_complete' => $request->slide_complete]];
+        } else {
+            $data = $slide->id;
+        }
+
+        $user->slides()->syncWithoutDetaching($data);
 
         return response()->json([
             'message' => 'hello'

@@ -26,19 +26,19 @@ const prevSlide = computed(() => {
     return props.slides[index - 1] ? props.slides[index - 1] : null;
 });
 
-const setSlide = (slide) => {
-    if (slide && slide.id) {
-        emits("setSlide", slide.id);
-
-        slideApi
-            .setSlideState(slide.id)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+const setSlide = (currentSlide, nextSlide, complete) => {
+    if (nextSlide && nextSlide.id) {
+        emits("setSlide", nextSlide.id);
     }
+
+    slideApi
+        .setSlideState(currentSlide, { slide_complete: complete })
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 </script>
 
@@ -49,15 +49,20 @@ const setSlide = (slide) => {
         </h3>
 
         <div class="flex justify-between">
-            <PrimaryButton @click="setSlide(prevSlide)">
+            <PrimaryButton @click="setSlide(slide.id, prevSlide)">
                 Previous
             </PrimaryButton>
 
             <div>
-                <PrimaryButton class="mr-4" @click="setSlide(nextSlide)">
+                <PrimaryButton
+                    class="mr-4"
+                    @click="setSlide(slide.id, nextSlide)"
+                >
                     Next
                 </PrimaryButton>
-                <PrimaryButton> Mark as complete </PrimaryButton>
+                <PrimaryButton @click="setSlide(slide.id, nextSlide, true)">
+                    Mark as complete
+                </PrimaryButton>
             </div>
         </div>
     </div>

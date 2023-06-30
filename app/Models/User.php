@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function slides(): BelongsToMany
     {
-        return $this->belongsToMany(Slide::class);
+        return $this->belongsToMany(Slide::class)->withPivot('slide_complete');;
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBiginteger('user_id')->unsigned();
             $table->unsignedBiginteger('slide_id')->unsigned();
-            $table->boolean('slide_complete')->default(false);
+            $table->boolean('slide_complete')->default(false)->nullable();
 
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
