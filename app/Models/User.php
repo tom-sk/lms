@@ -52,6 +52,11 @@ class User extends Authenticatable
 
     public function slides(): BelongsToMany
     {
-        return $this->belongsToMany(Slide::class)->withPivot('slide_complete');;
+        return $this->belongsToMany(Slide::class)->withPivot('slide_complete');
+    }
+
+    public function completedSlides(): BelongsToMany
+    {
+        return $this->slides()->wherePivot('slide_complete', true);
     }
 }

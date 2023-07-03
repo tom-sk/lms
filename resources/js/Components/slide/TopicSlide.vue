@@ -2,9 +2,12 @@
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { computed } from "vue";
 import slideApi from "@/api/slide-api";
-import axios from "axios";
 
 const props = defineProps({
+    topic: {
+        type: Object,
+        required: true,
+    },
     slide: {
         type: Object,
         required: true,
@@ -26,15 +29,19 @@ const prevSlide = computed(() => {
     return props.slides[index - 1] ? props.slides[index - 1] : null;
 });
 
-const setSlide = (currentSlide, nextSlide, complete) => {
+const setSlide = (currentSlideId, nextSlide, complete) => {
     if (nextSlide && nextSlide.id) {
         emits("setSlide", nextSlide.id);
     }
 
     slideApi
-        .setSlideState(currentSlide, { slide_complete: complete })
+        .setSlideState({
+            slide_id: currentSlideId,
+            slide_complete: complete,
+            topic_id: props.topic.id,
+        })
         .then((res) => {
-            console.log(res);
+            console.log(res.data);
         })
         .catch((err) => {
             console.log(err);
@@ -46,6 +53,7 @@ const setSlide = (currentSlide, nextSlide, complete) => {
     <div>
         <h3 class="text-2xl font-bold">
             {{ slide.title }}
+            {{ slide.slide_complete }}
         </h3>
 
         <div class="flex justify-between">

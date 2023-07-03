@@ -20,7 +20,7 @@ class Topic extends Model
 
     public function modules(): BelongsToMany
     {
-        return $this->belongsToMany(Module::class)->using(ModuleTopic::class);;
+        return $this->belongsToMany(Module::class);
     }
 
     public function slides(): HasMany

@@ -29,7 +29,7 @@ Route::group(['prefix' => 'v1'], function () {
 //    });
 //
     Route::middleware('auth')->group(function () {
-        Route::post('/slide/{slide}', [SlideController::class, 'update'])->name('slide.update');
+        Route::post('/slide', [SlideController::class, 'update'])->name('slide.update');
     });
 });
 

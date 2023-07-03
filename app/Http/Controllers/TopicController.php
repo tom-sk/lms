@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Module;
+use App\Models\Slide;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TopicController extends Controller
@@ -36,16 +38,25 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Module $module, Topic $topic)
+    public function show(Module $module, Topic $topic, Slide $slide)
     {
+        $user = Auth::user();
         $slide = $topic->slides()->first();
+
+        $slides = $topic->slides()->get();
+
+        $userSlides = $user->completedSlides()->get();
+
+        $slides->each(function ($slide) use ($userSlides) {
+            $slide->slide_complete = $userSlides->contains($slide);
+        });
 
         return Inertia::render('Topic/index', [
             'module' => $module,
             'topic' => $topic,
             'topics' => $module->topics()->get(),
             'slide' => $slide,
-            'slides' => $topic->slides()->get(),
+            'slides' => $slides,
         ]);
     }
 

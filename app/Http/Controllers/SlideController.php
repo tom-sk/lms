@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SlideUpdateRequest;
 use App\Models\Slide;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,20 +57,31 @@ class SlideController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Slide $slide)
+    public function update(SlideUpdateRequest $request)
     {
         $user = Auth::user();
 
+//        Create the data for the pivot table sync
         if($request->slide_complete === true) {
-            $data = [$slide->id => ['slide_complete' => $request->slide_complete]];
+            $data = [$request->slide_id => ['slide_complete' => $request->slide_complete]];
         } else {
-            $data = $slide->id;
+            $data = $request->slide_id;
         }
 
         $user->slides()->syncWithoutDetaching($data);
 
+//        Return the updated slides
+        $topic = Topic::find($request->topic_id);
+        $slides = $topic->slides()->get();
+
+        $userSlides = $user->completedSlides()->get();
+
+        $slides->each(function ($slide) use ($userSlides) {
+            $slide->slide_complete = $userSlides->contains($slide);
+        });
+
         return response()->json([
-            'message' => 'hello'
+            'slides' => $slides
         ], Response::HTTP_OK);
     }
 

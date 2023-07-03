@@ -228,8 +228,8 @@ const activeSlide = computed(() => {
         <main class="lg:pl-72">
             <div class="grid grid-cols-2 xl:pl-0">
                 <div class="bg-blue-200 px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
-                    <!-- Main area -->
                     <TopicSlide
+                        :topic="topic"
                         :slide="activeSlide"
                         :slides="slides"
                         @set-slide="setSlide"
