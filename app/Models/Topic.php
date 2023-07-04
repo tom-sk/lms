@@ -18,6 +18,11 @@ class Topic extends Model
         'updated_at',
     ];
 
+    protected $fillable = [
+        'title',
+        'content',
+    ];
+
     public function modules(): BelongsToMany
     {
         return $this->belongsToMany(Module::class);

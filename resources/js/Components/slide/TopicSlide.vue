@@ -42,7 +42,6 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
             topic_id: props.topic.id,
         })
         .then((res) => {
-            console.log(res.data);
             emits("setAllSlides", res.data.slides);
         })
         .catch((err) => {

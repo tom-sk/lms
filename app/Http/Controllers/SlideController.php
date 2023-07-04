@@ -61,17 +61,19 @@ class SlideController extends Controller
     {
         $user = Auth::user();
 
+        $requestData = [...$request->safe()->all()];
+
 //        Create the data for the pivot table sync
-        if($request->slide_complete !== null) {
-            $data = [$request->slide_id => ['slide_complete' => $request->slide_complete]];
+        if(array_key_exists('slide_complete', $requestData)) {
+            $data = [$requestData['slide_id'] => ['slide_complete' => $requestData['slide_complete']]];
         } else {
-            $data = $request->slide_id;
+            $data = $requestData['slide_id'];
         }
 
         $user->slides()->syncWithoutDetaching($data);
 
 //        Return the updated slides
-        $topic = Topic::find($request->topic_id);
+        $topic = Topic::find($requestData['topic_id']);
         $slides = $topic->slides()->get();
 
         $userSlides = $user->completedSlides()->get();

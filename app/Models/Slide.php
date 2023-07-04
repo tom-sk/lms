@@ -18,6 +18,11 @@ class Slide extends Model
         'updated_at',
     ];
 
+    protected $fillable = [
+        'title',
+        'content',
+    ];
+
     public function topics(): BelongsTo
     {
         return $this->belongsTo(Topic::class);

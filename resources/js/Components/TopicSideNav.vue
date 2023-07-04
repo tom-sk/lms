@@ -1,7 +1,4 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-defineOptions({ layout: AuthenticatedLayout });
-import { computed, ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 import { CheckCircleIcon } from "@heroicons/vue/24/outline";
 
