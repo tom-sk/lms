@@ -51,11 +51,13 @@ class TopicController extends Controller
             $slide->slide_complete = $userSlides->contains($slide);
         });
 
+        $activeSlideIndex = array_search(false, array_column($slides->toArray(), 'slide_complete'));
+
         return Inertia::render('Topic/index', [
             'module' => $module,
             'topic' => $topic,
             'topics' => $module->topics()->get(),
-            'slide' => $slide,
+            'slide' => $slides[$activeSlideIndex],
             'slides' => $slides,
         ]);
     }
