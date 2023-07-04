@@ -2,6 +2,7 @@
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { computed } from "vue";
 import slideApi from "@/api/slide-api";
+import { CheckIcon } from "@heroicons/vue/20/solid/index.js";
 
 const props = defineProps({
     topic: {
@@ -17,7 +18,7 @@ const props = defineProps({
         required: true,
     },
 });
-const emits = defineEmits(["setSlide"]);
+const emits = defineEmits(["setSlide", "setAllSlides"]);
 
 const nextSlide = computed(() => {
     const index = props.slides.findIndex((s) => s.id === props.slide.id);
@@ -42,6 +43,7 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
         })
         .then((res) => {
             console.log(res.data);
+            emits("setAllSlides", res.data.slides);
         })
         .catch((err) => {
             console.log(err);
@@ -51,9 +53,10 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
 
 <template>
     <div>
-        <h3 class="text-2xl font-bold">
+        <h3 class="mb-12 flex text-2xl font-bold">
+            <CheckIcon v-if="slide.slide_complete" class="mr-4 h-6 w-6" />
+
             {{ slide.title }}
-            {{ slide.slide_complete }}
         </h3>
 
         <div class="flex justify-between">
@@ -68,8 +71,18 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
                 >
                     Next
                 </PrimaryButton>
-                <PrimaryButton @click="setSlide(slide.id, nextSlide, true)">
+
+                <PrimaryButton
+                    v-if="!slide.slide_complete"
+                    @click="setSlide(slide.id, nextSlide, true)"
+                >
                     Mark as complete
+                </PrimaryButton>
+                <PrimaryButton
+                    v-else
+                    @click="setSlide(slide.id, nextSlide, false)"
+                >
+                    Un mark
                 </PrimaryButton>
             </div>
         </div>

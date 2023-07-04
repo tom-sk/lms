@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 defineOptions({ layout: AuthenticatedLayout });
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 import {
     Dialog,
@@ -11,6 +11,7 @@ import {
 } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 import TopicSlide from "@/Components/slide/TopicSlide.vue";
+import TopicSideNav from "@/Components/TopicSideNav.vue";
 
 const props = defineProps({
     module: {
@@ -35,6 +36,7 @@ const props = defineProps({
     },
 });
 
+const topicSlides = ref([]);
 const sidebarOpen = ref(false);
 const slideId = ref(props.slide.id);
 
@@ -44,6 +46,14 @@ const setSlide = (slide) => {
 
 const activeSlide = computed(() => {
     return props.slides.find((slide) => slide.id === slideId.value);
+});
+
+const setAllSlides = (slides) => {
+    topicSlides.value = slides;
+};
+
+onMounted(() => {
+    setAllSlides(props.slides);
 });
 </script>
 
@@ -156,49 +166,14 @@ const activeSlide = computed(() => {
             class="hidden lg:fixed lg:inset-y-0 lg:top-16 lg:z-50 lg:flex lg:w-72 lg:flex-col"
         >
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div
-                class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6"
-            >
-                <nav class="mt-6 flex flex-1 flex-col">
-                    <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                        <li>
-                            <ul role="list" class="-mx-2 space-y-4">
-                                <li v-for="item in topics" :key="item.title">
-                                    <Link
-                                        class="text-lg font-bold"
-                                        :href="
-                                            route('module.topics', {
-                                                module: module.id,
-                                                topic: item.id,
-                                            })
-                                        "
-                                    >
-                                        {{ item.title }}
-                                    </Link>
-
-                                    <ul
-                                        v-if="topic.id === item.id"
-                                        class="pl-2"
-                                    >
-                                        <li
-                                            v-for="slide in slides"
-                                            :key="slide.id"
-                                            :class="{
-                                                'font-bold':
-                                                    slide.id === activeSlide.id,
-                                            }"
-                                            class="cursor-pointer"
-                                            @click="setSlide(slide.id)"
-                                        >
-                                            {{ slide.title }}
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <TopicSideNav
+                :topic="topic"
+                :topics="topics"
+                :module="module"
+                :slides="topicSlides"
+                :active-slide="activeSlide"
+                @set-slide="setSlide"
+            />
         </div>
 
         <div
@@ -215,14 +190,6 @@ const activeSlide = computed(() => {
             <div class="flex-1 text-sm font-semibold leading-6 text-gray-900">
                 Dashboard
             </div>
-            <a href="#">
-                <span class="sr-only">Your profile</span>
-                <img
-                    class="h-8 w-8 rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                />
-            </a>
         </div>
 
         <main class="lg:pl-72">
@@ -231,8 +198,9 @@ const activeSlide = computed(() => {
                     <TopicSlide
                         :topic="topic"
                         :slide="activeSlide"
-                        :slides="slides"
+                        :slides="topicSlides"
                         @set-slide="setSlide"
+                        @set-all-slides="setAllSlides"
                     />
                 </div>
                 <div>Resources</div>

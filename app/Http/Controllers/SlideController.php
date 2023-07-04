@@ -62,7 +62,7 @@ class SlideController extends Controller
         $user = Auth::user();
 
 //        Create the data for the pivot table sync
-        if($request->slide_complete === true) {
+        if($request->slide_complete !== null) {
             $data = [$request->slide_id => ['slide_complete' => $request->slide_complete]];
         } else {
             $data = $request->slide_id;

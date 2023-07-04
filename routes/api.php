@@ -24,11 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //});
 
 Route::group(['prefix' => 'v1'], function () {
-//    Route::group(['middleware' => 'auth'], function () {
-//        Route::post('/slide', [SlideController::class, 'update'])->name('slide.update');
-//    });
-//
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
         Route::post('/slide', [SlideController::class, 'update'])->name('slide.update');
     });
 });
