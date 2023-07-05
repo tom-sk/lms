@@ -1,3 +1,4 @@
+title: Modules
 tabs:
   main:
     display: Main
@@ -50,11 +51,6 @@ tabs:
               instructions_position: above
               visibility: visible
               hide_display: false
-  sidebar:
-    display: Sidebar
-    sections:
-      -
-        fields:
           -
             handle: topics
             field:
@@ -62,6 +58,7 @@ tabs:
               resource: topic
               create: true
               reorderable: true
+              order_column: sort_order
               type: has_many
               display: Topics
               icon: has_many
@@ -69,5 +66,3 @@ tabs:
               instructions_position: above
               visibility: visible
               hide_display: false
-              order_column: sort_order
-title: Modules

@@ -21,6 +21,7 @@ class Slide extends Model
     protected $fillable = [
         'title',
         'content',
+        'sort_order',
     ];
 
     public function topics(): BelongsTo

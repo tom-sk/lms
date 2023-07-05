@@ -41,7 +41,6 @@ class TopicController extends Controller
     public function show(Module $module, Topic $topic, Slide $slide)
     {
         $user = Auth::user();
-        $slide = $topic->slides()->first();
 
         $slides = $topic->slides()->get();
 

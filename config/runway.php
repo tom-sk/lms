@@ -20,21 +20,7 @@ return [
         \App\Models\Topic::class => [
             'name' => 'Topics',
             'cp_icon' => 'date',
-            'blueprint' => [
-                'tabs' => [
-                    'main' => [
-                        'fields' => [
-                            [
-                                'handle' => 'title',
-                                'field' => [
-                                    'type' => 'text',
-                                    'validate' => 'required',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
+            'blueprint' => 'topics',
         ],
         \App\Models\Slide::class => [
             'name' => 'Slides',

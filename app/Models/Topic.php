@@ -30,6 +30,6 @@ class Topic extends Model
 
     public function slides(): HasMany
     {
-        return $this->hasMany(Slide::class);
+        return $this->hasMany(Slide::class)->orderBy('sort_order');;
     }
 }
