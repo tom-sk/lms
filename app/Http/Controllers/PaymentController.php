@@ -43,4 +43,16 @@ class PaymentController extends Controller
 
         return Inertia::render('Dashboard')->with(['flash.success' => 'Subscripbtion Created!!']);
     }
+
+    public function payOnboard(PaymentRequest $request): Response
+    {
+
+        $validated = $request->validated();
+
+
+        auth()->user()->newSubscription('cashier', $validated['productId'])
+            ->create($validated['paymentMethod']);
+
+        return Inertia::render('Onboard/Questions')->with(['flash.success' => 'Subscripbtion Created!!']);
+    }
 }

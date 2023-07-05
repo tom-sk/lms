@@ -1,14 +1,12 @@
 <?php
 
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\OnboardController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SlideController;
 use App\Http\Controllers\TopicController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +19,18 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/onboard', [OnboardController::class, 'index'])->name('onboard');
+Route::post('/onboard', [OnboardController::class, 'store'])->name('onboard.store');
 
-Route::get('/dashboard', [PageController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/onboard/payment', [OnboardController::class, 'payment'])->name('onboard.questions');
+    Route::get('/onboard/questions', [OnboardController::class, 'questions'])->name('onboard.questions');
+    Route::get('/onboard/payment', [OnboardController::class, 'payment'])->name('onboard.payment');
+    Route::post('/onboard/payment', [PaymentController::class, 'payOnboard'])->name('onboard.payment');
+
+
+    Route::get('/dashboard', [PageController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

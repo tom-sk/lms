@@ -62,7 +62,8 @@ const paymentElementSubmit = async () => {
     form.paymentMethod = setupIntent.payment_method;
     form.coupon = coupon.value;
 
-    form.post(route("pay"));
+    // form.post(route("pay"));
+    form.post(route("onboard.payment"));
 
     // if (error.type === "card_error" || error.type === "validation_error") {
     //     console.log(error.message);
@@ -73,7 +74,6 @@ const paymentElementSubmit = async () => {
 </script>
 
 <template>
-    {{ form.errors }}
     <form @submit.prevent="paymentElementSubmit">
         <StripeElements
             v-if="stripeLoaded"
