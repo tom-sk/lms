@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
+            $table->json('content')->nullable();
             $table->integer('sort_order')->nullable();
             $table->unsignedBiginteger('topic_id')->nullable();
         });

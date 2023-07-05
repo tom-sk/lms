@@ -3,6 +3,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { computed } from "vue";
 import slideApi from "@/api/slide-api";
 import { CheckIcon } from "@heroicons/vue/20/solid/index.js";
+import BardContainer from "@/Components/bard/BardContainer.vue";
 
 const props = defineProps({
     topic: {
@@ -57,6 +58,13 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
 
             {{ slide.title }}
         </h3>
+
+        <div>
+            <BardContainer
+                v-if="slide.content"
+                :content="JSON.parse(slide.content)"
+            />
+        </div>
 
         <div class="flex justify-between">
             <PrimaryButton @click="setSlide(slide.id, prevSlide)">

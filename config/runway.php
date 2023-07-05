@@ -15,7 +15,7 @@ return [
         \App\Models\Module::class => [
             'name' => 'Modules',
             'cp_icon' => 'date',
-             'blueprint' => 'modules',
+            'blueprint' => 'modules',
         ],
         \App\Models\Topic::class => [
             'name' => 'Topics',
@@ -39,21 +39,7 @@ return [
         \App\Models\Slide::class => [
             'name' => 'Slides',
             'cp_icon' => 'date',
-            'blueprint' => [
-                'tabs' => [
-                    'main' => [
-                        'fields' => [
-                            [
-                                'handle' => 'title',
-                                'field' => [
-                                    'type' => 'text',
-                                    'validate' => 'required',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ],
+            'blueprint' => 'slides',
         ],
         // \App\Models\Order::class => [
         //     'name' => 'Orders',
