@@ -10,7 +10,7 @@ import {
     TransitionRoot,
 } from "@headlessui/vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
-import TopicSlide from "@/Components/slide/TopicSlide.vue";
+import TopicSlide from "@/Components/slide/SlideItem.vue";
 import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
 

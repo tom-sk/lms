@@ -1,6 +1,7 @@
 <script setup>
 import BardText from "@/Components/bard/BardText.vue";
 import BardTable from "@/Components/bard/BardTable.vue";
+import BardSet from "@/Components/bard/BardSet.vue";
 
 defineProps({
     content: {
@@ -22,5 +23,6 @@ defineProps({
             class="mb-4"
             :table="item.content"
         />
+        <BardSet v-if="item.type === 'set'" :set="item.attrs" />
     </template>
 </template>

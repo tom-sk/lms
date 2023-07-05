@@ -13,7 +13,15 @@ class SlideFactory extends Factory
     {
         return [
             'title' => 'Slide ' . self::$order++,
+            'content' => json_encode([[
+                'type' => 'paragraph',
+                'content' => [
+                    [
+                        'text' => 'This is the slide content!!',
+                        'type' => 'text'
+                    ]
+                ]
+            ]]),
         ];
     }
-
 }
