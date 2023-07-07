@@ -55,7 +55,11 @@ onBeforeMount(() => {
 
     <div class="gap-4">
         <div>
-            <div v-for="(question, index) in questions" :key="question.id">
+            <div
+                v-for="(question, index) in questions"
+                :key="question.id"
+                class="mb-4"
+            >
                 {{ question.title }}
 
                 <div v-if="question.type === 'text'">

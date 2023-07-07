@@ -24,7 +24,7 @@ test('User can enrole in module', function () {
                 ->component('Dashboard')
                 ->has('errors')
                 ->where('errors', [])
-        );;
+        );
 
     expect($user->modules()->first()->id)->toBe($module->id);
 });

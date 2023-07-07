@@ -36,11 +36,6 @@ class OnboardQuestionsController extends Controller
         ]);
     }
 
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -57,18 +52,18 @@ class OnboardQuestionsController extends Controller
         $user = auth()->user();
         $data = $request->safe()->all()['formData'];
 
-        foreach ($data as $key => $value) {
-            $answerValue = '';
 
+        foreach ($data as $key => $value) {
             if(array_key_exists('text_answer', $value)){
                 $answerValue = $value['text_answer'];
             } else {
                 $answerValue = $value['options_answer'];
             }
 
-
             $user->attachQuestion(Question::find($value['id']), $answerValue );
         }
+
+        return to_route('onboard.questions');
     }
 
     /**

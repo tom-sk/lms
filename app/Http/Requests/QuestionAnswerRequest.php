@@ -14,8 +14,8 @@ class QuestionAnswerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'formData.*.id' => ['required', 'exists:questions,id'],
             'formData' => ['required', 'array'],
+            'formData.*.id' => ['required', 'exists:questions,id'],
             'formData.*.text_answer' =>['required_if:formData.*.type,"text"', 'string'],
             'formData.*.options_answer' =>['required_if:formData.*.type,"multiselect"', 'array'],
         ];
