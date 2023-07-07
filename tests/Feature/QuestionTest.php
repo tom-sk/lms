@@ -13,13 +13,24 @@ test('Question can have answers', function () {
         'options' => json_encode(['Yes', 'No']),
     ]);
 
+    $question2 = Question::create([
+        'title' => 'Question 1',
+        'type' => 'text',
+        'options' => json_encode(['Yes', 'No']),
+    ]);
+
     $this->get(route('onboard.questions'));
     $answerData = [
         "formData" => [
             [
-                "text_answer" => 2,
+                "text_answer" => 'the text answer',
                 "type" => "text",
                 "id" => $question1->id
+            ],
+            [
+                "options_answer" => ['one', 'two'],
+                "type" => "multiselect",
+                "id" => $question2->id
             ]
         ]
     ];
@@ -36,6 +47,8 @@ test('Question can have answers', function () {
         ->assertInertia(
             fn (AssertableInertia $page) => $page
                 ->component('Onboard/Questions')
+                ->has('errors')
+                ->where('errors', [])
         );
 
     expect($user->answers()->first()->id)->toBe($question1->id);
