@@ -17,7 +17,7 @@ class QuestionFactory extends Factory
      */
     public function definition(): array
     {
-        $options = ['text', 'textarea', 'radio', 'mutliselect'];
+        $options = ['text', 'mutliselect', 'radio' ];
 
         $type = $options[self::$order - 1];
 

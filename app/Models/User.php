@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Onboard\Answer;
+use App\Models\Onboard\Question;
+use App\Models\Onboard\UserAnswers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
+use function Pest\Laravel\json;
 
 class User extends Authenticatable
 {
@@ -63,6 +65,14 @@ class User extends Authenticatable
 
     public function answers(): BelongsToMany
     {
-        return $this->belongsToMany(Answer::class)->withPivot('answer');
+        return $this->belongsToMany(Question::class, 'user_question', 'user_id', 'question_id')
+            ->withPivot('value');
+    }
+
+    public function attachQuestion(Question $questionId, $value): void
+    {
+        $data = [$questionId['id'] => ['value' => json_encode($value)]];
+
+        $this->answers()->syncWithoutDetaching($data);
     }
 }

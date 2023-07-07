@@ -2,11 +2,9 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import Checkbox from "@/Components/Checkbox.vue";
-import { onBeforeMount } from "vue";
-import { RadioGroup } from "@headlessui/vue";
-import RadioButtons from "@/Components/form/RadioButtons.vue";
-import CheckBoxes from "@/Components/form/CheckBoxes.vue";
+import { onBeforeMount, ref } from "vue";
+import InputError from "@/Components/InputError.vue";
+import CheckBoxGroup from "@/Components/form/CheckBoxGroup.vue";
 
 defineOptions({ layout: GuestLayout });
 
@@ -17,53 +15,78 @@ const props = defineProps({
     },
 });
 
-const form = useForm({ formData: {} });
+const form = useForm({ formData: [] });
+
+const submit = () => {
+    form.post(route("onboard.questions"));
+};
 
 onBeforeMount(() => {
     props.questions.map((question) => {
-        const questionTitle = question["title"];
+        let answerType = {};
 
-        form.formData[questionTitle] = {
-            user_answer: [],
-        };
+        console.log(question["answer"]);
+
+        if (question["type"] === "text") {
+            answerType = {
+                text_answer: question["answer"]
+                    ? question["answer"][0]["value"]
+                    : "",
+            };
+        } else if (question["type"] === "mutliselect") {
+            answerType = {
+                options_answer: question["answer"]
+                    ? question["answer"][0]["value"]
+                    : ["No"],
+            };
+        }
+
+        form.formData.push({
+            ...answerType,
+            type: question["type"],
+            id: question["id"],
+        });
     });
 });
 </script>
 
 <template>
     <Head title="Register" />
-    {{ questions }}
-    <br />
-    <br />
-    <br />
-    {{ form.formData }}
 
     <div class="gap-4">
-        <RadioButtons />
-
         <div>
-            <div v-for="question in questions" :key="question.id">
+            <div v-for="(question, index) in questions" :key="question.id">
                 {{ question.title }}
 
                 <div v-if="question.type === 'text'">
                     <input
-                        v-model="
-                            form.formData[question['title']]['user_answer']
-                        "
+                        v-model="form.formData[index]['text_answer']"
                         type="text"
+                    />
+
+                    <InputError
+                        :message="form.errors[`formData.${index}.text_answer`]"
                     />
                 </div>
 
                 <div v-if="question.type === 'mutliselect'" :key="question.id">
-                    <CheckBoxes
-                        v-model="
-                            form.formData[question['title']]['user_answer']
-                        "
+                    <CheckBoxGroup
+                        v-model="form.formData[index]['options_answer']"
                         :options="question.options"
+                    />
+
+                    <InputError
+                        :message="
+                            form.errors[`formData.${index}.options_answer`]
+                        "
                     />
                 </div>
             </div>
         </div>
+
+        <InputError class="mt-2" :message="form.errors.formData" />
+
+        <PrimaryButton @click="submit">Submit</PrimaryButton>
 
         <Link :href="route('dashboard')">
             <PrimaryButton class="mt-4">Dashboard</PrimaryButton>
