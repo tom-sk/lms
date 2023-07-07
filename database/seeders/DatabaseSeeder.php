@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Module;
+use App\Models\Onboard\Answer;
+use App\Models\Onboard\Question;
 use App\Models\Slide;
 use App\Models\Topic;
 use Database\Factories\UserFactory;
@@ -30,6 +32,10 @@ class DatabaseSeeder extends Seeder
                             ->count(3)
                     )
             )
+            ->create();
+
+        Question::factory()
+            ->count(4)
             ->create();
     }
 }

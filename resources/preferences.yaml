@@ -1,0 +1,11 @@
+nav:
+  reorder: true
+  sections:
+    top_level: '@inherit'
+    content: '@inherit'
+    lms:
+      action: '@create'
+      items:
+        'content::modules': '@move'
+        'content::topics': '@move'
+        'content::slides': '@move'

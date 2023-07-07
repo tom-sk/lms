@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Onboard\Answer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function completedSlides(): BelongsToMany
     {
         return $this->slides()->wherePivot('slide_complete', true);
+    }
+
+    public function answers(): BelongsToMany
+    {
+        return $this->belongsToMany(Answer::class)->withPivot('answer');
     }
 }
