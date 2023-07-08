@@ -1,0 +1,9 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    paths:
+        - app
+    level: 2
+    excludePaths:
+        - ./*/*/FileToBeExcluded.php
+    checkMissingIterableValueType: false

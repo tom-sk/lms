@@ -79,7 +79,7 @@ class SlideController extends Controller
         $userSlides = $user->completedSlides()->get();
 
         $slides->each(function ($slide) use ($userSlides) {
-            $slide->slide_complete = $userSlides->contains($slide);
+            $slide['slide_complete'] = $userSlides->contains($slide);
         });
 
         return response()->json([

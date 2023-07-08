@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Onboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\QuestionAnswerRequest;
 use App\Models\Onboard\Question;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,11 +22,6 @@ class OnboardQuestionsController extends Controller
                     'title' => $question->title,
                     'type' => $question->type,
                     'options' => json_decode($question->options),
-                    'answer' => $question->answers()->get()->map(function ($answer) {
-                        return [
-                            'value' => json_decode($answer->pivot->value),
-                        ];
-                    }),
                 ];
             });
 
@@ -47,23 +41,9 @@ class OnboardQuestionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionAnswerRequest $request)
+    public function store(Request $request)
     {
-        $user = auth()->user();
-        $data = $request->safe()->all()['formData'];
 
-
-        foreach ($data as $key => $value) {
-            if(array_key_exists('text_answer', $value)){
-                $answerValue = $value['text_answer'];
-            } else {
-                $answerValue = $value['options_answer'];
-            }
-
-            $user->attachQuestion(Question::find($value['id']), $answerValue );
-        }
-
-        return to_route('onboard.questions');
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\Onboard\OnboardController;
@@ -29,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/onboard/payment', OnboardPaymentController::class)->name('onboard.payment');
     Route::post('/onboard/payment', [OnboardPaymentController::class, 'store'])->name('onboard.payment');
     Route::get('/onboard/questions', OnboardQuestionsController::class)->name('onboard.questions');
-    Route::post('/onboard/questions', [OnboardQuestionsController::class, 'store'])->name('onboard.questions');
+    Route::post('/onboard/questions', [AnswersController::class, 'store'])->name('onboard.questions');
 
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');

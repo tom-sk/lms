@@ -11,6 +11,8 @@ class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
      */
 
     public function __invoke()
@@ -20,7 +22,7 @@ class DashboardController extends Controller
         $userModules = $user->modules()->get();
 
         $modules->each(function ($module) use ($userModules) {
-            $module->enrolled = $userModules->contains($module);
+            $module['enrolled'] = $userModules->contains($module);
         });
 
         return Inertia::render('Dashboard', [

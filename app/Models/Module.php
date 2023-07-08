@@ -15,7 +15,8 @@ class Module extends Model
 
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'enrolled'
     ];
 
     public function topics(): BelongsToMany

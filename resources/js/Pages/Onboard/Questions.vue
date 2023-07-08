@@ -53,6 +53,8 @@ onBeforeMount(() => {
 <template>
     <Head title="Register" />
 
+    <!--    {{ questions }}-->
+
     <div class="gap-4">
         <div>
             <div

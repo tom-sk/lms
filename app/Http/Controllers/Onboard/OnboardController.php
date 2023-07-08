@@ -15,7 +15,7 @@ class OnboardController extends Controller
     public function __invoke()
     {
         return Inertia::render('Onboard/CreateAccount', [
-            'data' => Entry::findByUri('/onboard-page')
+            'data' => Entry::findByUri('/onboard-page', '')
         ]);
     }
 

@@ -47,7 +47,7 @@ class TopicController extends Controller
         $userSlides = $user->completedSlides()->get();
 
         $slides->each(function ($slide) use ($userSlides) {
-            $slide->slide_complete = $userSlides->contains($slide);
+            $slide['slide_complete'] = $userSlides->contains($slide);
         });
 
         $activeSlideIndex = array_search(false, array_column($slides->toArray(), 'slide_complete'));

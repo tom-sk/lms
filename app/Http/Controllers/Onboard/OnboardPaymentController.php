@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Onboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaymentRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -30,10 +31,9 @@ class OnboardPaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PaymentRequest $request)
     {
-        $validated = $request->validated();
-
+        $validated = $request->safe()->all();
 
         auth()->user()->newSubscription('cashier', $validated['productId'])
             ->create($validated['paymentMethod']);

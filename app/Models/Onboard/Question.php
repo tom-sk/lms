@@ -19,7 +19,6 @@ class Question extends Model
     public function answers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_question')
-            ->withPivot('value')
-            ->withTimestamps();
+            ->withPivot('value');
     }
 }
