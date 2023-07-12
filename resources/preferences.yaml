@@ -2,10 +2,15 @@ nav:
   reorder: true
   sections:
     top_level: '@inherit'
-    content: '@inherit'
+    content:
+      'content::collections':
+        action: '@modify'
+        reorder: true
+        children:
+          'content::collections::pages': '@inherit'
     lms:
       action: '@create'
       items:
-        'content::modules': '@move'
-        'content::topics': '@move'
         'content::slides': '@move'
+        'content::topics': '@move'
+        'content::modules': '@move'

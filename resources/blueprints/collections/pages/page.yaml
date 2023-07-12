@@ -1,5 +1,6 @@
 tabs:
   main:
+    display: Main
     sections:
       -
         fields:
@@ -8,12 +9,74 @@ tabs:
             field:
               type: text
               required: true
+              validate:
+                - required
           -
             handle: content
             field:
               type: markdown
               localizable: true
+          -
+            handle: template
+            field:
+              hide_partials: true
+              blueprint: false
+              type: template
+              display: Template
+              icon: template
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+          -
+            handle: flexible_content
+            field:
+              collapse: false
+              previews: true
+              fullscreen: true
+              sets:
+                new_set_group:
+                  display: 'New Set Group'
+                  instructions: null
+                  icon: null
+                  sets:
+                    hero:
+                      display: Hero
+                      instructions: null
+                      icon: layout-header
+                      fields:
+                        -
+                          handle: hero_header
+                          field:
+                            input_type: text
+                            antlers: false
+                            type: text
+                            display: 'Hero Header'
+                            icon: text
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
+                        -
+                          handle: hero_content
+                          field:
+                            antlers: false
+                            type: textarea
+                            display: 'Hero Content'
+                            icon: textarea
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
+              type: replicator
+              display: 'Flexible Content'
+              icon: replicator
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
   sidebar:
+    display: Sidebar
     sections:
       -
         fields:
@@ -21,5 +84,14 @@ tabs:
             handle: slug
             field:
               type: slug
+              localizable: true
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
               localizable: true
 title: Page

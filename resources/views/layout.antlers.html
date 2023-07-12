@@ -8,8 +8,16 @@
         {{ vite src="resources/js/site.js" }}
     </head>
     <body class="bg-gray-100 font-sans leading-normal text-gray-800">
-        <div class="mx-auto px-2 lg:min-h-screen flex flex-col items-center justify-center">
+        <div id="navigation">
+            {{ partial:components/nav }}
+        </div>
+
+        <div class="mx-auto lg:min-h-screen flex flex-col items-center justify-center">
             {{ template_content }}
         </div>
+
+        {{ partial:components/blog }}
+
+        {{ partial:components/footer }}
     </body>
 </html>

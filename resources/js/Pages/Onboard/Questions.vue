@@ -9,6 +9,10 @@ import CheckBoxGroup from "@/Components/form/CheckBoxGroup.vue";
 defineOptions({ layout: GuestLayout });
 
 const props = defineProps({
+    answers: {
+        type: Array,
+        default: () => [],
+    },
     questions: {
         type: Array,
         default: () => [],
@@ -54,6 +58,7 @@ onBeforeMount(() => {
     <Head title="Register" />
 
     <!--    {{ questions }}-->
+    {{ answers }}
 
     <div class="gap-4">
         <div>

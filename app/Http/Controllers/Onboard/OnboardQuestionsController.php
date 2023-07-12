@@ -15,6 +15,14 @@ class OnboardQuestionsController extends Controller
 
     public function __invoke()
     {
+        $answers = auth()->user()->answers()->get()->map(function ($answer) {
+            return [
+                'id' => $answer->id,
+                'question_id' => $answer->question_id,
+                'value' => json_decode($answer->value),
+            ];
+        });
+
         $questions = Question::get()
             ->map(function ($question) {
                 return [
@@ -27,6 +35,7 @@ class OnboardQuestionsController extends Controller
 
         return Inertia::render('Onboard/Questions',[
             'questions' => $questions,
+            'answers' => $answers,
         ]);
     }
 

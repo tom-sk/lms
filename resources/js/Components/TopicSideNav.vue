@@ -70,7 +70,7 @@ const setSlide = (slide) => {
                                     >
                                         <CheckCircleIcon
                                             :class="{
-                                                'text-green-500':
+                                                'text-green-400':
                                                     slide.slide_complete,
                                             }"
                                             class="mr-4 h-6 w-6"

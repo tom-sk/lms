@@ -1,0 +1,26 @@
+<nav class="flex bg-gray-500">
+    <div class="max-w-7xl mx-auto flex justify-between w-full">
+        <ul class="flex p-4 items-center justify-center space-x-4">
+            {{ nav include_home="true" }}
+                <li>
+                    <a href="{{ url }}"
+                       class="transition-all ease text-gray-300 hover:bg-gray-700 hover:text-white
+               block rounded-md px-3 py-2 text-base font-medium
+                {{ if is_current || is_parent }} bg-gray-700 text-white{{ /if }}">
+
+                        {{ title }}
+                    </a>
+                </li>
+            {{ /nav }}
+        </ul>
+
+        <ul class="flex p-4 items-center justify-center space-x-4">
+            <li>
+                <a href="/login" class="block rounded-md px-3 py-2 text-base font-medium bg-white ">Login</a>
+            </li>
+            <li>
+                <a href="/register" class="block rounded-md px-3 py-2 text-base font-medium bg-white ">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
