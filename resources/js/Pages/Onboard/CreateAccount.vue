@@ -117,7 +117,7 @@ const submit = () => {
                     </PrimaryButton>
                 </div>
             </form>
-            <div v-html="data.content" />
+            <div v-if="data" v-html="data.content" />
         </div>
     </GuestLayout>
 </template>

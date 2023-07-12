@@ -26,22 +26,27 @@ const submit = () => {
 };
 
 onBeforeMount(() => {
+    const answers = props.answers;
+
     props.questions.map((question) => {
         let answerType = {};
+        console.log(question.id);
 
-        console.log(question["answer"]);
+        let answerValue = "";
+
+        answers.map((answer) => {
+            if (answer["id"] === question["id"]) {
+                answerValue = answer.value;
+            }
+        });
 
         if (question["type"] === "text") {
             answerType = {
-                text_answer: question["answer"]
-                    ? question["answer"][0]["value"]
-                    : "",
+                text_answer: answerValue,
             };
         } else if (question["type"] === "mutliselect") {
             answerType = {
-                options_answer: question["answer"]
-                    ? question["answer"][0]["value"]
-                    : ["No"],
+                options_answer: answerValue ? answerValue : [""],
             };
         }
 
@@ -56,9 +61,6 @@ onBeforeMount(() => {
 
 <template>
     <Head title="Register" />
-
-    <!--    {{ questions }}-->
-    {{ answers }}
 
     <div class="gap-4">
         <div>
