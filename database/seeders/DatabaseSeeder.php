@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Question::factory()
-            ->count(2)
+            ->count(10)
             ->create();
     }
 }

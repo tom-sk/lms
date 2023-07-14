@@ -66,4 +66,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Answer::class);
     }
+
+    public function formattedAnswers(): array
+    {
+        return $this->answers()->get()->map(function ($answer) {
+            return [
+                'id' => $answer->id,
+                'question_id' => $answer->question_id,
+                'value' => json_decode($answer->value),
+            ];
+        })->toArray();
+    }
 }

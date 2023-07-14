@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\Module;
+use App\Models\Onboard\Question;
+use App\Models\Slide;
+use App\Models\Topic;
+
 return [
 
     /*
@@ -12,20 +17,25 @@ return [
     */
 
     'resources' => [
-        \App\Models\Module::class => [
+        Module::class => [
             'name' => 'Modules',
             'cp_icon' => 'date',
             'blueprint' => 'modules',
         ],
-        \App\Models\Topic::class => [
+        Topic::class => [
             'name' => 'Topics',
             'cp_icon' => 'date',
             'blueprint' => 'topics',
         ],
-        \App\Models\Slide::class => [
+        Slide::class => [
             'name' => 'Slides',
             'cp_icon' => 'date',
             'blueprint' => 'slides',
+        ],
+        Question::class => [
+            'name' => 'Questions',
+            'cp_icon' => 'date',
+            'blueprint' => 'questions',
         ],
         // \App\Models\Order::class => [
         //     'name' => 'Orders',

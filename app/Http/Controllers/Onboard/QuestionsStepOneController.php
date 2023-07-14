@@ -7,7 +7,7 @@ use App\Models\Onboard\Question;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class OnboardQuestionsController extends Controller
+class QuestionsStepOneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,9 @@ class OnboardQuestionsController extends Controller
 
     public function __invoke()
     {
-        $answers = auth()->user()->answers()->get()->map(function ($answer) {
-            return [
-                'id' => $answer->id,
-                'question_id' => $answer->question_id,
-                'value' => json_decode($answer->value),
-            ];
-        });
+        $answers = auth()->user()->formattedAnswers();
 
-        $questions = Question::get()
+        $questions = Question::findMany([1,2,3,4])
             ->map(function ($question) {
                 return [
                     'id' => $question->id,
@@ -33,7 +27,7 @@ class OnboardQuestionsController extends Controller
                 ];
             });
 
-        return Inertia::render('Onboard/Questions',[
+        return Inertia::render('Onboard/questions/Questions',[
             'questions' => $questions,
             'answers' => $answers,
         ]);

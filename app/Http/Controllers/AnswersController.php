@@ -47,7 +47,7 @@ class AnswersController extends Controller
             ]);
         }
 
-        return to_route('onboard.questions');
+        return to_route('onboard.questions.page.two');
     }
 
     /**

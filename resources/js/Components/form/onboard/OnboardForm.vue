@@ -1,12 +1,10 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { onBeforeMount, ref } from "vue";
 import InputError from "@/Components/InputError.vue";
 import CheckBoxGroup from "@/Components/form/CheckBoxGroup.vue";
-
-defineOptions({ layout: GuestLayout });
+import { useForm } from "@inertiajs/vue3";
+import { onBeforeMount } from "vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/form/TextInput.vue";
 
 const props = defineProps({
     answers: {
@@ -21,17 +19,24 @@ const props = defineProps({
 
 const form = useForm({ formData: [] });
 
+form.defaults({ formData: [] });
+
 const submit = () => {
-    form.post(route("onboard.questions"));
+    form.post(route("onboard.questions"), {
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset("formData");
+        },
+    });
 };
 
 onBeforeMount(() => {
+    form.formData = [];
+
     const answers = props.answers;
 
     props.questions.map((question) => {
         let answerType = {};
-        console.log(question.id);
-
         let answerValue = "";
 
         answers.map((answer) => {
@@ -60,8 +65,6 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <Head title="Register" />
-
     <div class="gap-4">
         <div>
             <div
@@ -69,16 +72,11 @@ onBeforeMount(() => {
                 :key="question.id"
                 class="mb-4"
             >
-                {{ question.title }}
-
                 <div v-if="question.type === 'text'">
-                    <input
+                    <TextInput
                         v-model="form.formData[index]['text_answer']"
-                        type="text"
-                    />
-
-                    <InputError
-                        :message="form.errors[`formData.${index}.text_answer`]"
+                        :label="question.title"
+                        :error="form.errors[`formData.${index}.text_answer`]"
                     />
                 </div>
 
@@ -97,12 +95,14 @@ onBeforeMount(() => {
             </div>
         </div>
 
-        <InputError class="mt-2" :message="form.errors.formData" />
-
-        <PrimaryButton @click="submit">Submit</PrimaryButton>
-
-        <Link :href="route('dashboard')">
-            <PrimaryButton class="mt-4">Dashboard</PrimaryButton>
-        </Link>
+        <div class="flex justify-end">
+            <PrimaryButton
+                type="submit"
+                :loading="form.processing"
+                @click="submit"
+            >
+                Next
+            </PrimaryButton>
+        </div>
     </div>
 </template>

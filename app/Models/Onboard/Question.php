@@ -4,6 +4,7 @@ namespace App\Models\Onboard;
 
 use App\Models\Onboard\UserAnswers;
 use App\Models\User;
+use DoubleThreeDigital\Runway\Traits\HasRunwayResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Question extends Model
 {
     use HasFactory;
+    use HasRunwayResource;
 
     protected $hidden = ['created_at', 'updated_at'];
 

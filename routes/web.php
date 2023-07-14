@@ -5,7 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\Onboard\OnboardController;
 use App\Http\Controllers\Onboard\OnboardPaymentController;
-use App\Http\Controllers\Onboard\OnboardQuestionsController;
+use App\Http\Controllers\Onboard\QuestionsStepOneController;
+use App\Http\Controllers\Onboard\QuestionsStepTwoController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopicController;
@@ -29,7 +30,9 @@ Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.cre
 Route::middleware('auth')->group(function () {
     Route::get('/onboard/payment', OnboardPaymentController::class)->name('onboard.payment');
     Route::post('/onboard/payment', [OnboardPaymentController::class, 'store'])->name('onboard.payment');
-    Route::get('/onboard/questions', OnboardQuestionsController::class)->name('onboard.questions');
+    Route::get('/onboard/questions/1', QuestionsStepOneController::class)->name('onboard.questions.page.one');
+    Route::get('/onboard/questions/2', QuestionsStepTwoController::class)->name('onboard.questions.page.two');
+
     Route::post('/onboard/questions', [AnswersController::class, 'store'])->name('onboard.questions');
 
 

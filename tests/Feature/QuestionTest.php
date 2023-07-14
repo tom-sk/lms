@@ -46,7 +46,7 @@ test('Question can have answers', function () {
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page) => $page
-                ->component('Onboard/Questions')
+                ->component('Onboard/questions/Questions')
                 ->has('errors')
                 ->where('errors', [])
         );

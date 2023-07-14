@@ -17,9 +17,10 @@ class QuestionFactory extends Factory
      */
     public function definition(): array
     {
-        $options = ['text', 'mutliselect', 'radio' ];
+//        $options = ['text', 'mutliselect' ];
+        $options = ['text' ];
 
-        $type = $options[self::$order - 1];
+        $type = $options[array_rand($options)];
 
         $options = null;
 
