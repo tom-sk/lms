@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionAnswerRequest;
 use App\Models\Onboard\Answer;
+use App\Services\AnswerService;
 use Illuminate\Http\Request;
 
 class AnswersController extends Controller
@@ -27,25 +28,9 @@ class AnswersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionAnswerRequest $request)
+    public function store(QuestionAnswerRequest $request, AnswerService $answerService)
     {
-        $user = auth()->user();
-        $data = $request->safe()->all()['formData'];
-
-        foreach ($data as $key => $value) {
-            if(array_key_exists('text_answer', $value)){
-                $answerValue = $value['text_answer'];
-            } else {
-                $answerValue = $value['options_answer'];
-            }
-
-            $matchThese = ['question_id' => $value['id']];
-
-            $user->answers()->updateOrCreate($matchThese, [
-                'question_id' => $value['id'],
-                'value' => json_encode($answerValue)
-            ]);
-        }
+        $answerService->store($request->validated());
 
         return to_route('onboard.questions.page.two');
     }
