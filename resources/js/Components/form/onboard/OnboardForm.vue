@@ -15,6 +15,11 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    postRoute: {
+        type: String,
+        default: "",
+        required: true,
+    },
 });
 
 const form = useForm({ formData: [] });
@@ -22,7 +27,7 @@ const form = useForm({ formData: [] });
 form.defaults({ formData: [] });
 
 const submit = () => {
-    form.post(route("onboard.questions"), {
+    form.post(props.postRoute, {
         preserveScroll: true,
         onSuccess: () => {
             form.reset("formData");
@@ -40,7 +45,7 @@ onBeforeMount(() => {
         let answerValue = "";
 
         answers.map((answer) => {
-            if (answer["id"] === question["id"]) {
+            if (answer["question_id"] === question["id"]) {
                 answerValue = answer.value;
             }
         });

@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Onboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Onboard\Question;
+use App\Services\AnswerService;
 use Inertia\Inertia;
 
 class QuestionsStepTwoController extends Controller
 {
+    public function __construct(private AnswerService $answerService)
+    {
+    }
+
     public function __invoke()
     {
         $questions = Question::findMany([5,6,7,8])
@@ -24,5 +29,12 @@ class QuestionsStepTwoController extends Controller
             'questions' => $questions,
             'answers' => auth()->user()->formattedAnswers(),
         ]);
+    }
+
+    public function store()
+    {
+        $this->answerService->store(request()->all());
+
+        return to_route('dashboard');
     }
 }

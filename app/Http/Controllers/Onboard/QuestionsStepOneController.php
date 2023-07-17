@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Onboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuestionAnswerRequest;
 use App\Models\Onboard\Question;
+use App\Services\AnswerService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,6 +14,10 @@ class QuestionsStepOneController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(private AnswerService $answerService)
+    {
+    }
 
     public function __invoke()
     {
@@ -27,7 +33,7 @@ class QuestionsStepOneController extends Controller
                 ];
             });
 
-        return Inertia::render('Onboard/questions/Questions',[
+        return Inertia::render('Onboard/questions/QuestionsStepOne',[
             'questions' => $questions,
             'answers' => $answers,
         ]);
@@ -44,9 +50,11 @@ class QuestionsStepOneController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(QuestionAnswerRequest $request)
     {
+        $this->answerService->store($request->validated());
 
+        return to_route('onboard.questions.step-two');
     }
 
     /**

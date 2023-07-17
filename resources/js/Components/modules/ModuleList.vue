@@ -10,7 +10,6 @@ defineProps({
 });
 
 function submit(id) {
-    console.log("post!");
     router.post(route("module.enrol", id));
 }
 </script>

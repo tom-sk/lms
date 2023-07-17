@@ -29,11 +29,16 @@ Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.cre
 
 Route::middleware('auth')->group(function () {
     Route::get('/onboard/payment', OnboardPaymentController::class)->name('onboard.payment');
-    Route::post('/onboard/payment', [OnboardPaymentController::class, 'store'])->name('onboard.payment');
-    Route::get('/onboard/questions/1', QuestionsStepOneController::class)->name('onboard.questions.page.one');
-    Route::get('/onboard/questions/2', QuestionsStepTwoController::class)->name('onboard.questions.page.two');
 
-    Route::post('/onboard/questions', [AnswersController::class, 'store'])->name('onboard.questions');
+    Route::post('/onboard/payment', [OnboardPaymentController::class, 'store'])->name('onboard.payment');
+
+    Route::get('/onboard/questions/1', QuestionsStepOneController::class)->name('onboard.questions.step-one');
+    Route::post('/onboard/questions/1', [QuestionsStepOneController::class, 'store'])->name('onboard.questions.step-one');
+
+    Route::get('/onboard/questions/2', QuestionsStepTwoController::class)->name('onboard.questions.step-two');
+    Route::post('/onboard/questions/2', [QuestionsStepTwoController::class, 'store'])->name('onboard.questions.step-two');
+
+//    Route::post('/onboard/questions', [AnswersController::class, 'store'])->name('onboard.questions');
 
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');

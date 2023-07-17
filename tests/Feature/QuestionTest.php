@@ -19,7 +19,8 @@ test('Question can have answers', function () {
         'options' => json_encode(['Yes', 'No']),
     ]);
 
-    $this->get(route('onboard.questions'));
+    $this->get(route('onboard.questions.step-one'));
+
     $answerData = [
         "formData" => [
             [
@@ -42,11 +43,11 @@ test('Question can have answers', function () {
 
     $this->actingAs($user)
         ->followingRedirects()
-        ->post(route('onboard.questions', $answerData ))
+        ->post(route('onboard.questions.step-one', $answerData ))
         ->assertOk()
         ->assertInertia(
             fn (AssertableInertia $page) => $page
-                ->component('Onboard/questions/Questions')
+                ->component('Onboard/questions/QuestionsStepTwo')
                 ->has('errors')
                 ->where('errors', [])
         );

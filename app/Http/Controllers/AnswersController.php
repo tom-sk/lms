@@ -12,6 +12,11 @@ class AnswersController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(private AnswerService $answerService)
+    {
+    }
+
     public function index()
     {
         //
@@ -28,11 +33,11 @@ class AnswersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionAnswerRequest $request, AnswerService $answerService)
+    public function store(QuestionAnswerRequest $request)
     {
-        $answerService->store($request->validated());
+        $this->answerService->store($request->validated());
 
-        return to_route('onboard.questions.page.two');
+        return to_route('onboard.questions.step-two');
     }
 
     /**

@@ -38,7 +38,9 @@ class OnboardPaymentController extends Controller
         auth()->user()->newSubscription('cashier', $validated['productId'])
             ->create($validated['paymentMethod']);
 
-        return Inertia::render('Onboard/Questions')->with(['flash.success' => 'Subscripbtion Created!!']);
+//        return Inertia::render('Onboard/questions/Questions')->with(['flash.success' => 'Subscripbtion Created!!']);
+
+        return to_route('onboard.questions.step-one');
     }
 
     /**

@@ -22,8 +22,12 @@ defineProps({
     <Head title="Register" />
 
     <div class="gap-4">
-        <Link :href="route('onboard.questions.page.one')"> back </Link>
-        <OnboardForm :questions="questions" :answers="answers" />
+        <Link :href="route('onboard.questions.step-one')"> back </Link>
+        <OnboardForm
+            :post-route="route('onboard.questions.step-two')"
+            :questions="questions"
+            :answers="answers"
+        />
 
         <Link :href="route('dashboard')">
             <PrimaryButton class="mt-4">Dashboard</PrimaryButton>

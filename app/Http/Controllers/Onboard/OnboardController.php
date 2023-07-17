@@ -15,7 +15,14 @@ class OnboardController extends Controller
     public function __invoke()
     {
 
-        $data = Entry::findByUri('/onboard-page', '');
+//        $data = Entry::query()
+//            ->where('collection', 'pages')
+//            ->where('slug', 'onboard-page')
+//            ->first();
+
+        /** @phpstan-ignore-next-line */
+        $data = Entry::findByUri('/onboard-page');
+
         return Inertia::render('Onboard/CreateAccount', [
             'data' => $data
         ]);

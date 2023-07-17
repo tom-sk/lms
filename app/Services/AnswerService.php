@@ -26,6 +26,6 @@ class AnswerService
             ]);
         }
 
-        return to_route('onboard.questions.page.two');
+        return to_route('onboard.questions.step-two');
     }
 }

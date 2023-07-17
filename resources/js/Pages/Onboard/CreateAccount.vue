@@ -32,6 +32,8 @@ const submit = () => {
         <Head title="Register" />
 
         <div class="grid grid-cols-2 gap-4">
+            <div v-if="data" v-html="data.content" />
+
             <form @submit.prevent="submit">
                 <div>
                     <InputLabel for="name" value="Name" />
@@ -117,7 +119,6 @@ const submit = () => {
                     </PrimaryButton>
                 </div>
             </form>
-            <div v-if="data" v-html="data.content" />
         </div>
     </GuestLayout>
 </template>
