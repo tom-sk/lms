@@ -35,6 +35,6 @@ class QuestionsStepTwoController extends Controller
     {
         $this->answerService->store(request()->all());
 
-        return to_route('dashboard');
+        return redirect()->route('dashboard')->with(['success' => 'Welcome! Subscription Created!!']);
     }
 }

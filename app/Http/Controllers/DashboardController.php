@@ -27,7 +27,9 @@ class DashboardController extends Controller
 
         return Inertia::render('Dashboard', [
             'modules' => $modules
-        ])->with(['flash.success' => 'Subscripbtion Created!!']);
+        ]);
+
+//        ->with(['flash.success' => 'Subscription Created!!']);
     }
 
     public function index()

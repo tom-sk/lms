@@ -12,12 +12,13 @@ const toggle = () => {
 
 onMounted(() => {
     if (
+        usePage().props.flash ||
         usePage().props.flash.success.length > 0 ||
         usePage().props.flash.errors.length > 0
     ) {
         setTimeout(() => {
             toggle();
-        }, 1000);
+        }, 500);
     }
 
     setTimeout(() => {
