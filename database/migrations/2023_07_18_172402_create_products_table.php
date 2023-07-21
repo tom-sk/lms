@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->string('stripe_id');
             $table->string('type');
+            $table->string('asset')->nullable();
             $table->decimal('price', 6, 2);
             $table->timestamps();
         });
