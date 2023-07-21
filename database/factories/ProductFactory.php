@@ -17,7 +17,7 @@ class ProductFactory extends Factory
     public function definition($stripeId = null)
     {
         return [
-            'name' => fake()->text,
+            'title' => fake()->text,
             'price' => fake()->randomFloat(2, 100, 1000),
             'user_id' => fake()->randomDigit,
             'stripe_id' => $stripeId ?? fake()->uuid,

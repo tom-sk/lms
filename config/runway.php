@@ -2,6 +2,7 @@
 
 use App\Models\Module;
 use App\Models\Onboard\Question;
+use App\Models\Product;
 use App\Models\Slide;
 use App\Models\Topic;
 
@@ -37,6 +38,11 @@ return [
             'cp_icon' => 'date',
             'blueprint' => 'questions',
         ],
+        Product::class => [
+            'name' => 'Products',
+            'cp_icon' => 'date',
+            'blueprint' => 'products'
+        ]
         // \App\Models\Order::class => [
         //     'name' => 'Orders',
 
