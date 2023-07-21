@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Onboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -17,6 +18,7 @@ class OnboardPaymentController extends Controller
     {
         return Inertia::render('Onboard/Payment', [
             'intent' => auth()->user()->createSetupIntent(),
+            'products' => Product::all()
         ]);
     }
 

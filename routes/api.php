@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SlideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/slide', [SlideController::class, 'update'])->name('slide.update');
+
+        Route::post('/coupon/verify', CouponController::class)->name('coupon.verify');
+
+        Route::post('/checkout/subscription', ProductController::class)->name('checkout.subscription');
     });
 });
+
 

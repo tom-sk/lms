@@ -2,7 +2,7 @@
 import { StripeElements, StripeElement } from "vue-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { ref, onBeforeMount } from "vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import { useCheckoutStore } from "@/stores/checkout.js";
 import { storeToRefs } from "pinia";
 const checkoutStore = useCheckoutStore();
@@ -26,12 +26,10 @@ const stripeKey = ref(
     "pk_test_51K59QtBmxT5gIh6pYdyliYMQKQtlvl354uJr2jTuXF7wi0r797i8N5M0hPR10OhMQjqY8qCeSEYOLTQPXUtFlI3K00rIhR1XFP"
 ); // test key
 
-const instanceOptions = ref({
-    // https://stripe.com/docs/js/initializing#init_stripe_js-options
-});
+const instanceOptions = ref({});
+
 const elementsOptions = ref({
     clientSecret: props.secret,
-    // https://stripe.com/docs/js/elements_object/create#stripe_elements-options
 });
 const paymentOptions = ref({
     paymentMethodOrder: ["apple_pay", "google_pay", "card", "klarna"],

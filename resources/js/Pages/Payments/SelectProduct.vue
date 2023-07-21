@@ -1,5 +1,4 @@
 <script setup>
-import { computed, ref } from "vue";
 import {
     RadioGroup,
     RadioGroupDescription,
@@ -7,26 +6,34 @@ import {
     RadioGroupOption,
 } from "@headlessui/vue";
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
-import { useCheckoutStore } from "@/stores/checkout";
-import { storeToRefs } from "pinia";
+import { computed } from "vue";
 
-const checkoutStore = useCheckoutStore();
-const { products } = checkoutStore;
-const { productId } = storeToRefs(checkoutStore);
+const props = defineProps({
+    products: {
+        type: Array,
+        required: true,
+    },
+    modelValue: {
+        type: String,
+        required: true,
+    },
+});
 
-const selected = computed({
+const emit = defineEmits(["update:modelValue"]);
+
+const value = computed({
     get() {
-        return productId.strip_id;
+        return props.modelValue;
     },
     set(value) {
-        productId.value = value.strip_id;
+        emit("update:modelValue", value);
     },
 });
 </script>
 
 <template>
     <div class="mt-10 border-t border-gray-200 pt-10">
-        <RadioGroup v-model="selected">
+        <RadioGroup v-model="value">
             <RadioGroupLabel class="text-lg font-medium text-gray-900"
                 >Delivery method</RadioGroupLabel
             >
@@ -36,10 +43,10 @@ const selected = computed({
             >
                 <RadioGroupOption
                     v-for="product in products"
-                    :key="product.strip_id"
+                    :key="product.stripe_id"
                     v-slot="{ checked, active }"
                     as="template"
-                    :value="product"
+                    :value="product.stripe_id"
                 >
                     <div
                         :class="[
@@ -53,7 +60,7 @@ const selected = computed({
                                 <RadioGroupLabel
                                     as="span"
                                     class="block text-sm font-medium text-gray-900"
-                                    >{{ product.title }}</RadioGroupLabel
+                                    >{{ product.name }}</RadioGroupLabel
                                 >
 
                                 <RadioGroupDescription

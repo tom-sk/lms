@@ -8,6 +8,7 @@ use App\Http\Controllers\Onboard\OnboardPaymentController;
 use App\Http\Controllers\Onboard\QuestionsStepOneController;
 use App\Http\Controllers\Onboard\QuestionsStepTwoController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
@@ -38,9 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/onboard/questions/2', QuestionsStepTwoController::class)->name('onboard.questions.step-two');
     Route::post('/onboard/questions/2', [QuestionsStepTwoController::class, 'store'])->name('onboard.questions.step-two');
 
-//    Route::post('/onboard/questions', [AnswersController::class, 'store'])->name('onboard.questions');
-
-
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -53,6 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscribe', [PaymentController::class, 'subscribe'])->name('subscribe');
     Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
 });
+
+Route::post('/webhook', [ProductController::class, 'webhook'])->name('checkout.webhook');
+
 
 
 

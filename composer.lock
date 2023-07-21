@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "412513194b39b944dbbf399a35e3503f",
+    "content-hash": "8871fc37a4dfb52e1a3685993b4feea9",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -12840,6 +12840,51 @@
                 }
             ],
             "time": "2023-06-28T13:51:52+00:00"
+        },
+        {
+            "name": "styleci/cli",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StyleCI/CLI.git",
+                "reference": "4c7a7145674a626c95296f146e08becfdf383c2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StyleCI/CLI/zipball/4c7a7145674a626c95296f146e08becfdf383c2f",
+                "reference": "4c7a7145674a626c95296f146e08becfdf383c2f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zlib": "*",
+                "php": "^7.4.15 || ^8.0.2"
+            },
+            "suggest": {
+                "ext-curl": "Required for high performance HTTP transport"
+            },
+            "bin": [
+                "bin/styleci"
+            ],
+            "type": "library",
+            "extra": {
+                "bin-dir": "bin"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "StyleCI",
+                    "email": "support@styleci.io"
+                }
+            ],
+            "description": "The CLI tool for StyleCI",
+            "support": {
+                "source": "https://github.com/StyleCI/CLI/tree/v1.5.1"
+            },
+            "time": "2023-06-11T22:22:31+00:00"
         },
         {
             "name": "ta-tikoma/phpunit-architecture-test",
