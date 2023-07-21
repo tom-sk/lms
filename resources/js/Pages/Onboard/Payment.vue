@@ -54,13 +54,16 @@ const submit = () => {
 
             <SelectProduct v-model="productId" :products="products" />
 
-            <!--            <CouponVerification />-->
-
-            <!--            <CardDetails :secret="intent.client_secret" />-->
+            <CouponVerification />
+            <!---->
+            <CardDetails
+                :product-id="productId"
+                :secret="intent.client_secret"
+            />
         </div>
 
         <div class="mx-auto max-w-7xl bg-white p-12 sm:px-6 lg:px-8">
-            <PrimaryButton type="button" @click="submit">Submit</PrimaryButton>
+            <!--            <PrimaryButton type="button" @click="submit">Submit</PrimaryButton>-->
         </div>
     </div>
 </template>

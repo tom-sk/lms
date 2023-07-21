@@ -13,6 +13,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    productId: {
+        type: String,
+        required: true,
+    },
 });
 
 onBeforeMount(() => {
@@ -56,7 +60,7 @@ const paymentElementSubmit = async () => {
         })
         .then();
 
-    form.productId = productId.value;
+    form.productId = props.productId;
     form.paymentMethod = setupIntent.payment_method;
     form.coupon = coupon.value;
 

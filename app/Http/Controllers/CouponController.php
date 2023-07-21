@@ -12,21 +12,30 @@ class CouponController extends Controller
     {
         $validated = $request->safe()->only(['userCoupon']);
 
-
         $userCoupon = $validated['userCoupon'];
 
+
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-        $coupons = $stripe->coupons->all();
+        $coupons = $stripe->promotionCodes->all();
 
-        $coupons = collect($coupons)->pluck('id', 'name' );
+        $coupons = collect($coupons)->map(function ($coupon) {
+            return [
+                'id' => $coupon['id'],
+                'code' => $coupon['code'],
+            ];
+        });
 
-        $couponID = array_first($coupons, fn($key, $value) => $value === $userCoupon);
+        $couponID = $coupons->where('code', $userCoupon)->first();
 
-//        dd($coupons, $couponID);
+        if($couponID !== null){
+            return response()->json([
+                'couponID' => $couponID['id']
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'couponID' => false
+            ], Response::HTTP_NO_CONTENT);
+        }
 
-
-        return response()->json([
-            'couponID' => $couponID
-        ], Response::HTTP_OK);
     }
 }

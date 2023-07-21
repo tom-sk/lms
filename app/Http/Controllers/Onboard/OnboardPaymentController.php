@@ -37,10 +37,16 @@ class OnboardPaymentController extends Controller
     {
         $validated = $request->safe()->all();
 
-        auth()->user()->newSubscription('cashier', $validated['productId'])
-            ->create($validated['paymentMethod']);
+        $coupon = $validated['coupon'];
 
-//        return Inertia::render('Onboard/questions/Questions')->with(['flash.success' => 'Subscripbtion Created!!']);
+        if(!empty($coupon)){
+            auth()->user()->newSubscription('essential', $validated['productId'])
+                ->withPromotionCode($coupon)
+                ->create($validated['paymentMethod']);
+        } else {
+            auth()->user()->newSubscription('essential', $validated['productId'])
+                ->create($validated['paymentMethod']);
+        }
 
         return to_route('onboard.questions.step-one');
     }
