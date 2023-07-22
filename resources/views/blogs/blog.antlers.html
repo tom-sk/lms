@@ -1,0 +1,28 @@
+<div class="max-w-5xl mx-auto relative ">
+    <article class="">
+        <h1>{{ title }}</h1>
+
+        <div>
+            {{ if feature_image }}
+                <div class="w-full">
+                    <img src="{{ feature_image }}" alt="" class="w-full">
+                </div>
+            {{ /if }}
+        </div>
+        <div class="content">
+            {{ content }}
+
+            {{ if type == "text" }}
+                <div class="text">
+                    {{ text }}
+                </div>
+
+            {{ elseif type == "image" }}
+
+                <img src="{{ image }}" alt="">
+            {{ /if }}
+
+            {{ /content }}
+        </div>
+    </article>
+</div>

@@ -27,6 +27,11 @@ class ProductSeeder extends Seeder
                 'type' => 'subscription',
                 'price' => 100.00,
             ],
+            [
+                'title' => 'Single Product',
+                'type' => 'single',
+                'price' => 12.00,
+            ],
         ];
 
         foreach ($products as $product) {
