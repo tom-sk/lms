@@ -15,7 +15,7 @@ const showingNavigationDropdown = ref(false);
         <!-- Primary Navigation Menu -->
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 justify-between">
-                <div class="flex">
+                <div class="flex items-center">
                     <!-- Logo -->
                     <div class="flex shrink-0 items-center">
                         <Link :href="route('dashboard')">
@@ -26,7 +26,7 @@ const showingNavigationDropdown = ref(false);
                     </div>
 
                     <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden sm:-my-px sm:ml-10 sm:flex">
                         <NavLink
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"

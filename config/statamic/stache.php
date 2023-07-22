@@ -42,7 +42,7 @@ return [
 
         'collections' => [
             'class' => Stores\CollectionsStore::class,
-            'directory' => base_path('content/collections'),
+            'directory' => base_path('resources/collections'),
         ],
 
         'entries' => [

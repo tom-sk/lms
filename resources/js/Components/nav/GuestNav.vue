@@ -1,29 +1,46 @@
 <script setup>
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Link } from "@inertiajs/vue3";
+import NavLink from "@/Components/NavLink.vue";
 </script>
 
 <template>
-    <nav class="border-b border-gray-100 bg-white">
-        <!-- Primary Navigation Menu -->
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 justify-between">
-                <div class="flex">
-                    <!-- Logo -->
-                    <div class="flex shrink-0 items-center">
-                        <Link :href="route('dashboard')">
-                            <ApplicationLogo
-                                class="block h-9 w-auto fill-current text-gray-800"
-                            />
-                        </Link>
-                    </div>
-
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <a href="/">Home</a>
-                    </div>
+    <nav class="flex bg-white">
+        <div class="mx-auto flex w-full max-w-7xl justify-between">
+            <div class="flex items-center">
+                <div class="h-8 w-20">
+                    <img
+                        class="h-auto w-full"
+                        src="http://localhost/storage/logo.png"
+                        alt=""
+                    />
                 </div>
+
+                <ul class="flex items-center justify-center space-x-4 p-4">
+                    <li>
+                        <a
+                            class="transition-text ease block rounded-md bg-gray-700 px-3 py-2 text-base font-bold text-white transition-all transition-opacity hover:bg-gray-700 hover:opacity-75"
+                            href="/"
+                            >Home</a
+                        >
+                    </li>
+                </ul>
             </div>
+
+            <ul class="flex items-center justify-center space-x-4 p-4">
+                <li>
+                    <NavLink
+                        :active="route().current('login')"
+                        :href="route('login')"
+                        >Login</NavLink
+                    >
+                </li>
+                <li>
+                    <NavLink
+                        :href="route('register')"
+                        :active="route().current('register')"
+                        >Register</NavLink
+                    >
+                </li>
+            </ul>
         </div>
     </nav>
 </template>
