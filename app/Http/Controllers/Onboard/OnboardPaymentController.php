@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Onboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentRequest;
 use App\Models\Product;
+use App\Services\SubscriptionPaymentService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,11 +15,15 @@ class OnboardPaymentController extends Controller
      * Display a listing of the resource.
      */
 
+
+    public function __construct(private SubscriptionPaymentService $subscriptionPaymentService )
+    {
+    }
     public function __invoke()
     {
         return Inertia::render('Onboard/Payment', [
             'intent' => auth()->user()->createSetupIntent(),
-            'products' => Product::all()
+            'products' => Product::where('type', 'subscription')->get()
         ]);
     }
 
@@ -35,12 +40,7 @@ class OnboardPaymentController extends Controller
      */
     public function store(PaymentRequest $request)
     {
-        $validated = $request->safe()->all();
-
-        auth()->user()->newSubscription('cashier', $validated['productId'])
-            ->create($validated['paymentMethod']);
-
-//        return Inertia::render('Onboard/questions/Questions')->with(['flash.success' => 'Subscripbtion Created!!']);
+        $this->subscriptionPaymentService->create($request->toDto());
 
         return to_route('onboard.questions.step-one');
     }

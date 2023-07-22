@@ -6,10 +6,14 @@ import { useForm } from "@inertiajs/vue3";
 import { useCheckoutStore } from "@/stores/checkout.js";
 import { storeToRefs } from "pinia";
 const checkoutStore = useCheckoutStore();
-const { productId, coupon } = storeToRefs(checkoutStore);
+const { coupon } = storeToRefs(checkoutStore);
 
 const props = defineProps({
     secret: {
+        type: String,
+        required: true,
+    },
+    productId: {
         type: String,
         required: true,
     },
@@ -56,11 +60,10 @@ const paymentElementSubmit = async () => {
         })
         .then();
 
-    form.productId = productId.value;
+    form.productId = props.productId;
     form.paymentMethod = setupIntent.payment_method;
     form.coupon = coupon.value;
 
-    // form.post(route("pay"));
     form.post(route("onboard.payment"));
 
     // if (error.type === "card_error" || error.type === "validation_error") {

@@ -1,4 +1,3 @@
-title: Slides
 tabs:
   main:
     display: Main
@@ -45,16 +44,17 @@ tabs:
                 image:
                   display: Image
                   instructions: null
-                  icon: media-image-camera
+                  icon: media-image-photo-focus-frame
                   sets:
                     image:
                       display: Image
                       instructions: null
-                      icon: media-image-camera
+                      icon: null
                       fields:
                         -
                           handle: image
                           field:
+                            max_files: 1
                             mode: list
                             container: assets
                             restrict: false
@@ -78,3 +78,22 @@ tabs:
               instructions_position: above
               visibility: visible
               hide_display: false
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+          -
+            handle: date
+            field:
+              type: date
+              required: true
+              default: now
+              validate:
+                - required
+title: Blog

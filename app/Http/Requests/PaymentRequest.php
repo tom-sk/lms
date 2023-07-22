@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\DataTransferObjects\SubscriptionData;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PaymentRequest extends FormRequest
@@ -35,5 +36,14 @@ class PaymentRequest extends FormRequest
             'coupon.string' => 'Must be string!',
             'paymentMethod.required' => 'Must have valida payment method!'
         ];
+    }
+
+    public function toDto(): SubscriptionData
+    {
+        return new SubscriptionData(
+            productId: $this->validated('productId'),
+            paymentMethod: $this->validated('paymentMethod'),
+            coupon: $this->validated('coupon'),
+        );
     }
 }

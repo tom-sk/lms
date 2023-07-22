@@ -3,10 +3,15 @@ import { useCheckoutStore } from "@/stores/checkout.js";
 import { storeToRefs } from "pinia";
 import slideApi from "@/api/slide-api";
 import { ref } from "vue";
+import InputError from "@/Components/InputError.vue";
+import InputSuccess from "@/Components/InputSuccess.vue";
 const checkoutStore = useCheckoutStore();
 const { coupon } = storeToRefs(checkoutStore);
 
 const userCoupon = ref("");
+
+const errorMsg = ref("");
+const successMsg = ref("");
 
 const submitCoupon = () => {
     slideApi
@@ -16,10 +21,22 @@ const submitCoupon = () => {
         .then((res) => {
             console.log(res);
 
-            coupon.value = res.data.couponID;
+            if (res.status === 200) {
+                coupon.value = res.data.couponID;
+                successMsg.value = "Coupon applied!";
+                errorMsg.value = "";
+            } else {
+                errorMsg.value = "Coupon not found";
+            }
         })
         .catch((err) => {
-            console.log(err);
+            if (
+                err.response &&
+                err.response.data &&
+                err.response.data.message
+            ) {
+                errorMsg.value = err.response.data.message;
+            }
         });
 };
 </script>
@@ -39,6 +56,9 @@ const submitCoupon = () => {
                 autocomplete="email"
                 class="mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
+
+            <InputError :message="error" name="coupon" class="mb-4" />
+            <InputSuccess :message="successMsg" name="coupon" class="mb-4" />
 
             <button
                 type="submit"

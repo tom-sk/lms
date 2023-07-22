@@ -1,4 +1,4 @@
-title: Questions
+title: 'Product Page'
 tabs:
   main:
     display: Main
@@ -13,36 +13,19 @@ tabs:
               validate:
                 - required
           -
-            handle: type
+            handle: products
             field:
-              options:
-                text: Text
-                mutliselect: 'Radio Group'
-              taggable: false
-              push_tags: false
-              multiple: false
-              clearable: false
-              searchable: true
-              cast_booleans: false
-              type: select
-              display: Type
-              icon: select
+              mode: default
+              resource: product
+              create: true
+              reorderable: false
+              type: has_many
+              display: Products
+              icon: has_many
               listable: hidden
               instructions_position: above
               visibility: visible
               hide_display: false
-          -
-            handle: options
-            field:
-              type: list
-              display: Options
-              icon: list
-              listable: hidden
-              instructions_position: above
-              visibility: visible
-              hide_display: false
-              if:
-                type: 'equals Radio Group'
   sidebar:
     display: Sidebar
     sections:

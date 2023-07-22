@@ -16,16 +16,21 @@ class ProductSeeder extends Seeder
 
         $products = [
             [
-                'name' => 'Essential',
+                'title' => 'Essential',
                 'stripe_id' => $options[0],
                 'type' => 'subscription',
                 'price' => 10.00,
             ],
             [
-                'name' => 'Premium',
+                'title' => 'Premium',
                 'stripe_id' => $options[1],
                 'type' => 'subscription',
                 'price' => 100.00,
+            ],
+            [
+                'title' => 'Single Product',
+                'type' => 'single',
+                'price' => 12.00,
             ],
         ];
 
