@@ -27,7 +27,7 @@ class StripeService
                 'price_data' => [
                     'currency' => 'usd',
                     'product_data' => [
-                        'name' => $product->name,
+                        'name' => $product->title,
                     ],
                     'unit_amount' => '2000',
                 ],
