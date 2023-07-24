@@ -9,7 +9,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 
 
-class PaymentController extends Controller
+class SubscriptionPaymentController extends Controller
 {
     public function subscribe(Request $request): Response
     {

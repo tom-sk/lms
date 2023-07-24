@@ -1,19 +1,15 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 defineOptions({ layout: GuestLayout });
-import { Head, useForm } from "@inertiajs/vue3";
-import CardDetails from "@/Pages/Payments/CardDetails.vue";
+import { Head } from "@inertiajs/vue3";
+import SubscriptionCardDetails from "@/Pages/Payments/SubscriptionCardDetails.vue";
 import SelectProduct from "@/Pages/Payments/SelectProduct.vue";
 import { useCheckoutStore } from "@/stores/checkout";
-import { storeToRefs } from "pinia";
 import CouponVerification from "@/Components/products/CouponVerification.vue";
 import { computed, ref } from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 import stripeApi from "@/api/stripe-api";
-
-const checkoutStore = useCheckoutStore();
-const { coupon } = storeToRefs(checkoutStore);
 
 const props = defineProps({
     intent: {
@@ -56,7 +52,7 @@ const submit = () => {
 
             <CouponVerification />
             <!---->
-            <CardDetails
+            <SubscriptionCardDetails
                 :product-id="productId"
                 :secret="intent.client_secret"
             />

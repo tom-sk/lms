@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8871fc37a4dfb52e1a3685993b4feea9",
+    "content-hash": "f8a0129fe84660a216c12e4cd0ba3cd9",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -5832,6 +5832,111 @@
                 "source": "https://github.com/statamic/Stringy"
             },
             "time": "2022-05-04T18:41:52+00:00"
+        },
+        {
+            "name": "stillat/antlers-components",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/antlers-components.git",
+                "reference": "d73bf3bf39fe902c68ee86cce005028b19837772"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/antlers-components/zipball/d73bf3bf39fe902c68ee86cce005028b19837772",
+                "reference": "d73bf3bf39fe902c68ee86cce005028b19837772",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.36 || ^10",
+                "php": "^8.1",
+                "statamic/cms": "^4",
+                "stillat/blade-parser": "^1.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.4",
+                "orchestra/testbench": "^7.0 || ^8.0",
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "statamic": {
+                    "name": "Antlers Components",
+                    "description": "Provides HTML-like Antlers component tags for Antlers partials, Blade components, and Livewire components."
+                },
+                "laravel": {
+                    "providers": [
+                        "Stillat\\AntlersComponents\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\AntlersComponents\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/Stillat/antlers-components/issues",
+                "source": "https://github.com/Stillat/antlers-components/tree/v2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/johnathonkoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-05-10T00:44:05+00:00"
+        },
+        {
+            "name": "stillat/blade-parser",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/blade-parser.git",
+                "reference": "bac16bfe299f644f0838a9fb8643620a546de2e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/blade-parser/zipball/bac16bfe299f644f0838a9fb8643620a546de2e8",
+                "reference": "bac16bfe299f644f0838a9fb8643620a546de2e8",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.36 || ^10.0"
+            },
+            "require-dev": {
+                "brianium/paratest": "*",
+                "laravel/pint": "^1.4",
+                "orchestra/testbench": "*",
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Stillat\\BladeParser\\ServiceProvider",
+                        "Stillat\\BladeParser\\Providers\\ValidatorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\BladeParser\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/Stillat/blade-parser/issues",
+                "source": "https://github.com/Stillat/blade-parser/tree/v1.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/johnathonkoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-05-13T19:08:29+00:00"
         },
         {
             "name": "stripe/stripe-php",

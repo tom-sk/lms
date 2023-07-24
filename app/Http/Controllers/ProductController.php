@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\SingleProductRequest;
 use App\Models\Order;
 use App\Models\Product;
 use App\Services\OrderService;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -18,16 +20,16 @@ class ProductController extends Controller
     {
     }
 
-    public function __invoke(ProductRequest $request)
+    public function __invoke(SingleProductRequest $request)
     {
 
-        $validated = $request->safe()->all();
+        $data = $request->toDto();
 
-        $product = Product::find($validated['id']);
+        $product = Product::find($data->id);
 
         $session = $this->stripeService->create($product, route('onboard.questions.step-one'), route('onboard.payment'));
 
-        $this->orderService->create($validated['price'], $session);
+//        $this->orderService->create($data->price, $session);
 
         return response()->json([
             'url' => $session->url
@@ -101,5 +103,22 @@ class ProductController extends Controller
         }
 
         return response('');
+    }
+
+    public function single(Product $product)
+    {
+//        $stripe = new \Stripe\StripeClient('sk_test_51K59QtBmxT5gIh6pPxNRMR9knRTXeaP9v3DcJ9PblkAFn4thlrAHibSawl2dVXsY4E9BUZag3wM8SQh54S2l465t0081KQcBSW');
+//        $intent = $stripe->paymentIntents->create([
+//            'amount' => $product->price * 100,
+//            'currency' => 'gbp',
+//            'automatic_payment_methods' => [
+//                'enabled' => true,
+//            ],
+//        ]);
+
+        return Inertia::render('ProductPage', [
+//            'secret' => $intent->client_secret,
+            'product' => $product
+        ]);
     }
 }

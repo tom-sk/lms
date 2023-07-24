@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\DataTransferObjects\ProductData;
+use App\DataTransferObjects\SingleProductData;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class SingleProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +25,15 @@ class ProductRequest extends FormRequest
         return [
             "id" => ['int', 'required', 'exists:products,id',],
             "title" => ["string"],
-            "stripe_id" => ["string","required"],
-            "type" => ["string","required"],
             "price" => ["string","required"],
         ];
     }
 
-    public function toDto(): ProductData
+    public function toDto(): SingleProductData
     {
-        return new ProductData(
+        return new SingleProductData(
             id: $this->validated('id'),
             title: $this->validated('title'),
-            stripe_id: $this->validated('stripe_id'),
-            type: $this->validated('type'),
             price: $this->validated('price'),
         );
     }

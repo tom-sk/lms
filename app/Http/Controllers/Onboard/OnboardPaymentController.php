@@ -22,7 +22,7 @@ class OnboardPaymentController extends Controller
     public function __invoke()
     {
         return Inertia::render('Onboard/Payment', [
-            'intent' => auth()->user()->createSetupIntent(),
+            'secret' => env('STRIPE_SECRET'),
             'products' => Product::where('type', 'subscription')->get()
         ]);
     }
