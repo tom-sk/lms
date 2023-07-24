@@ -22,14 +22,13 @@ class ProductController extends Controller
 
     public function __invoke(SingleProductRequest $request)
     {
-
         $data = $request->toDto();
 
         $product = Product::find($data->id);
 
-        $session = $this->stripeService->create($product, route('onboard.questions.step-one'), route('onboard.payment'));
+        $session = $this->stripeService->create($product, route('product.checkout-success'), route('onboard.payment'));
 
-//        $this->orderService->create($data->price, $session);
+        $this->orderService->create($data->price, $session);
 
         return response()->json([
             'url' => $session->url
@@ -57,7 +56,9 @@ class ProductController extends Controller
                 $order->save();
             }
 
-            return view('product.checkout-success', compact('customer'));
+            return Inertia::render('Product/Success', [
+                'customer' => $customer,
+            ]);
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }

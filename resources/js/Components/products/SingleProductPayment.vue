@@ -2,8 +2,13 @@
 import { StripeElements, StripeElement } from "vue-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { ref, onBeforeMount } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
+    productId: {
+        type: Number,
+        required: true,
+    },
     secret: {
         type: String,
         required: true,
@@ -29,18 +34,27 @@ onBeforeMount(() => {
     });
 });
 
+const paymentMethod = "";
+
+const form = useForm({
+    paymentMethod,
+    productId: props.productId,
+});
+
 const pay = async () => {
     const elements = elms.value.elements;
     const stripe = elms.value.instance;
 
-    const { setupIntent, error } = await stripe
-        .confirmPayment({
-            elements,
-            redirect: "if_required",
-        })
-        .then();
+    const { setupIntent } = await stripe.confirmSetup({
+        elements,
+        redirect: "if_required",
+    });
 
-    // form.post(route("onboard.payment"));
+    console.log(setupIntent);
+
+    form.paymentMethod = setupIntent.payment_method;
+
+    form.post(route("single.payment"));
 };
 </script>
 
@@ -54,5 +68,11 @@ const pay = async () => {
     >
         <StripeElement ref="payment" type="payment" :elements="elements" />
     </StripeElements>
-    <button type="button" @click="pay">Pay</button>
+    <button
+        type="submit"
+        class="mt-2 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+        @click="pay"
+    >
+        Pay
+    </button>
 </template>

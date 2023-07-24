@@ -2,14 +2,10 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 defineOptions({ layout: GuestLayout });
 import { Head } from "@inertiajs/vue3";
-import SubscriptionCardDetails from "@/Pages/Payments/SubscriptionCardDetails.vue";
 import SelectProduct from "@/Pages/Payments/SelectProduct.vue";
-import { useCheckoutStore } from "@/stores/checkout";
+import { ref } from "vue";
 import CouponVerification from "@/Components/products/CouponVerification.vue";
-import { computed, ref } from "vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-
-import stripeApi from "@/api/stripe-api";
+import SubscriptionCardDetails from "@/Pages/Payments/SubscriptionCardDetails.vue";
 
 const props = defineProps({
     intent: {
@@ -23,22 +19,6 @@ const props = defineProps({
 });
 
 const productId = ref(props.products[0].stripe_id);
-
-const product = computed(() => {
-    return props.products.find(
-        (product) => product.stripe_id === productId.value
-    );
-});
-
-const submit = () => {
-    stripeApi
-        .checkoutSubscription({
-            ...product.value,
-        })
-        .then((response) => {
-            window.location.href = response.data.url;
-        });
-};
 </script>
 
 <template>
@@ -46,20 +26,16 @@ const submit = () => {
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl bg-white p-12 sm:px-6 lg:px-8">
-            Subscription page
+            Subscription page 1
 
             <SelectProduct v-model="productId" :products="products" />
 
             <CouponVerification />
-            <!---->
+
             <SubscriptionCardDetails
                 :product-id="productId"
                 :secret="intent.client_secret"
             />
-        </div>
-
-        <div class="mx-auto max-w-7xl bg-white p-12 sm:px-6 lg:px-8">
-            <!--            <PrimaryButton type="button" @click="submit">Submit</PrimaryButton>-->
         </div>
     </div>
 </template>

@@ -14,7 +14,7 @@ class StripeService
 
         $lineItems[] = [
             'price_data' => [
-                'currency' => 'usd',
+                'currency' => 'gbp',
                 'product_data' => [
                     'name' => $product->title,
                 ],

@@ -7,6 +7,7 @@ use App\Http\Controllers\Onboard\OnboardController;
 use App\Http\Controllers\Onboard\OnboardPaymentController;
 use App\Http\Controllers\Onboard\QuestionsStepOneController;
 use App\Http\Controllers\Onboard\QuestionsStepTwoController;
+use App\Http\Controllers\SingleProductController;
 use App\Http\Controllers\SubscriptionPaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -30,7 +31,13 @@ Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.cre
 
 Route::post('/product-page', [ProductController::class, 'single'])->name('product-page');
 Route::get('/product-page', [ProductController::class, 'single'])->name('product-page');
-Route::get('/single-product/{product}', [ProductController::class, 'single'])->name('product-page');
+Route::post('/webhook', [ProductController::class, 'webhook'])->name('checkout.webhook');
+
+
+Route::get('/purchase-success', [SingleProductController::class, 'success'])->name('product.checkout-success');
+Route::get('/single-product/{product}', SingleProductController::class)->name('product-page');
+Route::post('/single-payment', [SingleProductController::class, 'store'])->name('single.payment');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/onboard/payment', OnboardPaymentController::class)->name('onboard.payment');
@@ -56,7 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/pay', [SubscriptionPaymentController::class, 'pay'])->name('pay');
 });
 
-Route::post('/webhook', [ProductController::class, 'webhook'])->name('checkout.webhook');
 
 
 
