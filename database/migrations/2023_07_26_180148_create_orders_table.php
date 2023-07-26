@@ -16,11 +16,17 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->decimal('total_price', 6, 2);
-            $table->string('session_id');
-            $table->unsignedBiginteger('user_id')->unsigned();
+            $table->unsignedBiginteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
+
+            $table->unsignedBiginteger('customer_id')->unsigned()->nullable();
+            $table->foreign('customer_id')->references('id')
+                ->on('customers')->onDelete('cascade');
+
+            $table->unsignedBiginteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')
+                ->on('products')->onDelete('cascade');
 
 
             $table->timestamps();

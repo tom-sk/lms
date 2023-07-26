@@ -3,6 +3,11 @@ import { StripeElements, StripeElement } from "vue-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { ref, onBeforeMount } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import InputError from "@/Components/InputError.vue";
+import { useCheckoutStore } from "../../stores/checkout";
+import { storeToRefs } from "pinia";
+const checkoutStore = useCheckoutStore();
+const { customerEmail } = storeToRefs(checkoutStore);
 
 const props = defineProps({
     productId: {
@@ -38,6 +43,7 @@ const paymentMethod = "";
 
 const form = useForm({
     paymentMethod,
+    email: customerEmail.value,
     productId: props.productId,
 });
 
@@ -50,9 +56,8 @@ const pay = async () => {
         redirect: "if_required",
     });
 
-    console.log(setupIntent);
-
     form.paymentMethod = setupIntent.payment_method;
+    form.email = customerEmail.value;
 
     form.post(route("single.payment"));
 };
@@ -68,6 +73,9 @@ const pay = async () => {
     >
         <StripeElement ref="payment" type="payment" :elements="elements" />
     </StripeElements>
+
+    {{ form.errors }}
+    <InputError :message="form.errors.password" class="mt-2" />
     <button
         type="submit"
         class="mt-2 w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"

@@ -29,14 +29,15 @@ Route::get('/onboard', OnboardController::class)->name('onboard');
 Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.create');
 
 
-Route::post('/product-page', [ProductController::class, 'single'])->name('product-page');
-Route::get('/product-page', [ProductController::class, 'single'])->name('product-page');
-Route::post('/webhook', [ProductController::class, 'webhook'])->name('checkout.webhook');
+//Route::post('/product-page', [ProductController::class, 'single'])->name('product-page');
+//Route::get('/product-page', [ProductController::class, 'single'])->name('product-page');
+//Route::post('/webhook', [ProductController::class, 'webhook'])->name('checkout.webhook');
 
 
 Route::get('/purchase-success', [SingleProductController::class, 'success'])->name('product.checkout-success');
 Route::get('/single-product/{product}', SingleProductController::class)->name('product-page');
 Route::post('/single-payment', [SingleProductController::class, 'store'])->name('single.payment');
+//Route::get('/single-product/{product}', GuestProductController::class)->name('product-page');
 
 
 Route::middleware('auth')->group(function () {

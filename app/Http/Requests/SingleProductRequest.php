@@ -23,18 +23,18 @@ class SingleProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id" => ['int', 'required', 'exists:products,id',],
-            "title" => ["string"],
-            "price" => ["string","required"],
+            "productId" => ['int', 'required', 'exists:products,id',],
+            "email" => ["email", "required"],
+            "paymentMethod" => ["string","required"],
         ];
     }
 
     public function toDto(): SingleProductData
     {
         return new SingleProductData(
-            id: $this->validated('id'),
-            title: $this->validated('title'),
-            price: $this->validated('price'),
+            productId: $this->validated('productId'),
+            email: $this->validated('email'),
+            paymentMethod: $this->validated('paymentMethod'),
         );
     }
 }
