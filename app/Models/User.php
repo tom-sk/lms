@@ -7,6 +7,7 @@ use App\Models\Onboard\Answer;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
@@ -76,5 +77,10 @@ class User extends Authenticatable
                 'value' => json_decode($answer->value),
             ];
         })->toArray();
+    }
+
+    public function orders(): MorphOne
+    {
+        return $this->morphOne(Order::class, 'customer');
     }
 }

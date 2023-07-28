@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AnswersController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\Onboard\OnboardController;
@@ -9,7 +9,6 @@ use App\Http\Controllers\Onboard\QuestionsStepOneController;
 use App\Http\Controllers\Onboard\QuestionsStepTwoController;
 use App\Http\Controllers\SingleProductController;
 use App\Http\Controllers\SubscriptionPaymentController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
@@ -29,15 +28,17 @@ Route::get('/onboard', OnboardController::class)->name('onboard');
 Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.create');
 
 
-//Route::post('/product-page', [ProductController::class, 'single'])->name('product-page');
-//Route::get('/product-page', [ProductController::class, 'single'])->name('product-page');
-//Route::post('/webhook', [ProductController::class, 'webhook'])->name('checkout.webhook');
-
+Route::stripeWebhooks('/webhook');
 
 Route::get('/purchase-success', [SingleProductController::class, 'success'])->name('product.checkout-success');
 Route::get('/single-product/{product}', SingleProductController::class)->name('product-page');
 Route::post('/single-payment', [SingleProductController::class, 'store'])->name('single.payment');
 //Route::get('/single-product/{product}', GuestProductController::class)->name('product-page');
+
+Route::get('/product/{product}', [SingleProductController::class, 'test'])->name('product-page');
+
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 
 Route::middleware('auth')->group(function () {

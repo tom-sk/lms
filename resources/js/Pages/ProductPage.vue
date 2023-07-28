@@ -42,7 +42,11 @@ const formatCurrency = (number) => {
                         <div>{{ formatCurrency(product.price) }}</div>
                     </div>
 
-                    <TextInput v-model="customerEmail" label="Email" />
+                    <TextInput
+                        v-model="customerEmail"
+                        type="email"
+                        label="Email"
+                    />
                 </div>
 
                 <!--                <SubscriptionCardDetails-->

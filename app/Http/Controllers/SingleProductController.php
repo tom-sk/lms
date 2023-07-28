@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SingleProductRequest;
 use App\Models\Customer;
-use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SingleProductController extends Controller
 {
@@ -29,12 +27,9 @@ class SingleProductController extends Controller
 
         $data = $request->toDto();
 
-
         if (Auth::check()) {
             $customer = auth()->user();
         } else {
-
-
             $customer = User::where('email', $data->email)->first();
 
             if (!$customer) {
@@ -43,40 +38,53 @@ class SingleProductController extends Controller
                 ]);
             }
         }
-
-//        TODO: Assign order to customer
-        $order = Order::create([
-            'user_id' => $customer->id,
+//
+        $customer->orders()->create([
             'product_id' => $data->productId,
-            'status' => 'unpaid',
+            'status' => 'pending',
         ]);
-
 
         $paymentMethod = $data->paymentMethod;
 
         $product = Product::find($data->productId);
 
+        auth()->user()->charge(
+            100, $data->paymentMethod
+        );
+
         try {
-            $customer->createOrGetStripeCustomer();
-            $customer->updateDefaultPaymentMethod($paymentMethod);
-            $customer->charge($product->price * 100, $paymentMethod);
+//            $customer->createOrGetStripeCustomer();
+//            $customer->updateDefaultPaymentMethod($paymentMethod);
+//            $customer->charge($product->price * 100, $paymentMethod);
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
+//            dd($exception->getMessage());
         }
 
-        $order->update([
-            'status' => 'paid',
-        ]);
 
-        return Inertia::render('Product/Success');
+//        return to_route('product.checkout-success');
+        return Inertia::render('Product/Success' ,['checkoutSession' => '{CHECKOUT_SESSION_ID}']);
     }
 
     public function success(Request $request)
     {
 
-        //        TODO: send product in email or allow acces some other way
+        //        TODO: send product in email or allow access some other way
 
-        return Inertia::render('Product/Success');
+//        dd($request->user());
+//        $checkoutSession = $request->user()->stripe()->checkout->sessions->retrieve($request->get('session_id'));
+
+        return Inertia::render('Product/Success' ,['checkoutSession' => '$checkoutSession']);
+
+    }
+
+    public function webhook(Request $request)
+    {
+//         TODO: listen to webhook and complete order status
+    }
+
+    public function test(Product $product)
+    {
+        return Inertia::render('Product/Show',  compact('product'));
 
     }
 }
