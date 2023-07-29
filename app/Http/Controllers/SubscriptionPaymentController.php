@@ -9,7 +9,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 
 
-class PaymentController extends Controller
+class SubscriptionPaymentController extends Controller
 {
     public function subscribe(Request $request): Response
     {
@@ -25,18 +25,8 @@ class PaymentController extends Controller
 
         $validated = $request->validated();
 
-//        $coupon = Coupon::where('name',$validated['coupon'])->first();
-
-//        if($coupon){
-//            auth()->user()->newSubscription('cashier', $validated['productId'])
-//                ->withCoupon($coupon['stripe_id'])
-//                ->create($validated['paymentMethod']);
-//        } else {
             auth()->user()->newSubscription('cashier', $validated['productId'])
                 ->create($validated['paymentMethod']);
-//        }
-
-//        return redirect()->back()->with(['flash.success' => 'Subscripbtion Created!!']);
 
         return Inertia::render('Dashboard')->with(['flash.success' => 'Subscripbtion Created!!']);
     }

@@ -26,5 +26,7 @@
         <env name="DB_DATABASE" value="testing"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="STRIPE_SECRET" value="sk_test_51K59QtBmxT5gIh6pPxNRMR9knRTXeaP9v3DcJ9PblkAFn4thlrAHibSawl2dVXsY4E9BUZag3wM8SQh54S2l465t0081KQcBSW"/>
+        <env name="STRIPE_KEY" value="pk_test_51K59QtBmxT5gIh6pYdyliYMQKQtlvl354uJr2jTuXF7wi0r797i8N5M0hPR10OhMQjqY8qCeSEYOLTQPXUtFlI3K00rIhR1XFP"/>
     </php>
 </phpunit>

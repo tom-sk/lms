@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import CardDetails from "@/Pages/Payments/CardDetails.vue";
+import CardDetails from "@/Pages/Payments/SubscriptionCardDetails.vue";
 import SelectProduct from "@/Pages/Payments/SelectProduct.vue";
 import { useCheckoutStore } from "@/stores/checkout";
 import { storeToRefs } from "pinia";

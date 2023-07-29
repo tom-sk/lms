@@ -6,7 +6,10 @@ export const useCheckoutStore = defineStore("checkout", () => {
 
     const productId = ref("");
 
+    const customerEmail = ref("");
+
     return {
+        customerEmail,
         coupon,
         productId,
     };

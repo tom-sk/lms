@@ -7,6 +7,7 @@ import {
 } from "@headlessui/vue";
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 import { computed } from "vue";
+import helpers from "@/utils/helpers.js";
 
 const props = defineProps({
     products: {
@@ -32,10 +33,10 @@ const value = computed({
 </script>
 
 <template>
-    <div class="mt-10 border-t border-gray-200 pt-10">
+    <div>
         <RadioGroup v-model="value">
             <RadioGroupLabel class="text-lg font-medium text-gray-900"
-                >Delivery method</RadioGroupLabel
+                >Select Subscription</RadioGroupLabel
             >
 
             <div
@@ -43,10 +44,10 @@ const value = computed({
             >
                 <RadioGroupOption
                     v-for="product in products"
-                    :key="product.stripe_id"
+                    :key="product.id"
                     v-slot="{ checked, active }"
                     as="template"
-                    :value="product.stripe_id"
+                    :value="product.id"
                 >
                     <div
                         :class="[
@@ -66,7 +67,9 @@ const value = computed({
                                 <RadioGroupDescription
                                     as="span"
                                     class="mt-6 text-sm font-medium text-gray-900"
-                                    >{{ product.price }}</RadioGroupDescription
+                                    >{{
+                                        helpers.formatCurrency(product.price)
+                                    }}</RadioGroupDescription
                                 >
                             </span>
                         </span>

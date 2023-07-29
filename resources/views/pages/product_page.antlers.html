@@ -1,11 +1,19 @@
-<h1 class="text-3xl text-center">
-    {{title}}
-</h1>
+<div class="max-w-6xl mx-auto">
+    <h1 class="text-3xl text-center">
+        {{title}}
+    </h1>
 
-{{ products }}
+    {{ products }}
 
-<h2>{{ title }}</h2>
+    <h2>{{ title }}</h2>
 
-{{price}}
 
-{{ /products }}
+    <div class="w-24">
+        <a href="/product/{{id}}" class="text-center transition-text ease block rounded-md px-3 py-2 text-base font-bold text-white transition-all transition-opacity bg-gray-700 hover:opacity-75">Product</a>
+    </div>
+
+    {{ /products }}
+
+
+</div>
+

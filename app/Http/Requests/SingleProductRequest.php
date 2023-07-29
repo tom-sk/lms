@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\DataTransferObjects\SubscriptionData;
+use App\DataTransferObjects\SingleProductData;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PaymentRequest extends FormRequest
+class SingleProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,27 +23,18 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'productId' => 'required|int',
-            'coupon' => 'nullable|string',
-            'paymentMethod'=> 'required|string',
+            "productId" => ['int', 'required', 'exists:products,id',],
+            "email" => ["email", "required"],
+            "paymentMethod" => ["string","required"],
         ];
     }
 
-    public function messages()
+    public function toDto(): SingleProductData
     {
-        return [
-            'productId.required' => 'Product is required!',
-            'coupon.string' => 'Must be string!',
-            'paymentMethod.required' => 'Must have valida payment method!'
-        ];
-    }
-
-    public function toDto(): SubscriptionData
-    {
-        return new SubscriptionData(
+        return new SingleProductData(
             productId: $this->validated('productId'),
+            email: $this->validated('email'),
             paymentMethod: $this->validated('paymentMethod'),
-            coupon: $this->validated('coupon'),
         );
     }
 }

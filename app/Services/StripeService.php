@@ -12,34 +12,22 @@ class StripeService
     public function create(Product $product, string $successUrl, string $cancelUrl){
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $paymentMode = 'payment';
-
-        if($product->type === 'subscription'){
-            $paymentMode = 'subscription';
-
-            $lineItems[] = [
-                'price' => $product->stripe_id,
-                // For metered billing, do not pass quantity
-                'quantity' => 1,
-            ];
-        } else {
-            $lineItems[] = [
-                'price_data' => [
-                    'currency' => 'usd',
-                    'product_data' => [
-                        'name' => $product->title,
-                    ],
-                    'unit_amount' => '2000',
+        $lineItems[] = [
+            'price_data' => [
+                'currency' => 'gbp',
+                'product_data' => [
+                    'name' => $product->title,
                 ],
-            ];
-        }
-
+                'unit_amount' => $product->price * 100,
+            ],
+            'quantity' => 1,
+        ];
 
         return \Stripe\Checkout\Session::create([
             'line_items' => [[
                 $lineItems
             ]],
-            'mode' => $paymentMode,
+            'mode' => 'payment',
             'success_url' => $successUrl . "?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => $cancelUrl,
             'allow_promotion_codes' => true,

@@ -18,6 +18,7 @@ class DashboardController extends Controller
     public function __invoke()
     {
         $user = Auth::user();
+
         $modules = Module::all();
         $userModules = $user->modules()->get();
 
