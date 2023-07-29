@@ -6,6 +6,7 @@ import SelectProduct from "@/Pages/Payments/SelectProduct.vue";
 import { ref } from "vue";
 import CouponVerification from "@/Components/products/CouponVerification.vue";
 import SubscriptionCardDetails from "@/Pages/Payments/SubscriptionCardDetails.vue";
+import SubStripeCheckout from "@/Components/products/SubStripeCheckout.vue";
 
 const props = defineProps({
     intent: {
@@ -18,7 +19,7 @@ const props = defineProps({
     },
 });
 
-const productId = ref(props.products[0].stripe_id);
+const productId = ref(props.products[0].id);
 </script>
 
 <template>
@@ -26,9 +27,13 @@ const productId = ref(props.products[0].stripe_id);
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl bg-white p-12 sm:px-6 lg:px-8">
-            Subscription page 1
+            <SelectProduct
+                v-model="productId"
+                class="mb-12"
+                :products="products"
+            />
 
-            <SelectProduct v-model="productId" :products="products" />
+            <SubStripeCheckout v-if="productId" :product-id="productId" />
 
             <CouponVerification />
 

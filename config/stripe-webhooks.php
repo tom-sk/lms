@@ -1,5 +1,9 @@
 <?php
 
+use App\Jobs\StripeWebhooks\HandleCheckoutSession;
+use App\Jobs\StripeWebhooks\HandleCustomerSubscriptionCreated;
+use App\Jobs\StripeWebhooks\HandleCustomerSubscriptionUpdated;
+
 return [
     /*
      * Stripe will sign each webhook using a secret. You can find the used secret at the
@@ -22,7 +26,9 @@ return [
      * https://stripe.com/docs/api#event_types.
      */
     'jobs' => [
-         'checkout_session_completed' => \App\Jobs\StripeWebhooks\HandleCheckoutSession::class,
+        'checkout_session_completed' => HandleCheckoutSession::class,
+        'customer_subscription_created' =>  HandleCustomerSubscriptionCreated::class,
+        'customer_subscription_updated' =>  HandleCustomerSubscriptionUpdated::class,
 //         'source_chargeable' => \App\Jobs\StripeWebhooks\HandleChargeableSource::class,
         // 'charge_failed' => \App\Jobs\StripeWebhooks\HandleFailedCharge::class,
     ],

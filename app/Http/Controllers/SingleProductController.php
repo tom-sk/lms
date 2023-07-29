@@ -14,13 +14,7 @@ class SingleProductController extends Controller
 {
     public function __invoke(Product $product)
     {
-        $stripe = new \Stripe\StripeClient(
-            env('STRIPE_SECRET')
-        );
-
-        $intent = $stripe->setupIntents->create(['usage' => 'on_session']);;
-
-        return Inertia::render('ProductPage',  compact('product', 'intent'));
+        return Inertia::render('Product/Show',  compact('product'));
     }
 
     public function store(SingleProductRequest $request){

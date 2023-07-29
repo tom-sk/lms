@@ -3,6 +3,7 @@
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\SubCheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::group(['prefix' => 'v1'], function () {
     });
 
     Route::post('/checkout/product', CheckoutController::class)->name('api.checkout');
+    Route::post('/checkout/subscription', SubCheckoutController::class)->name('api.sub-checkout');
 });
 
 

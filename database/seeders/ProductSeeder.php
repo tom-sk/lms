@@ -12,20 +12,20 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $options = ['price_1NJhk1BmxT5gIh6pt1UwfQqp', 'price_1K59RIBmxT5gIh6p9bYtrAdY' ];
+        $options = ['price_1NZI5HBmxT5gIh6ph91MRYo8', 'price_1NJhk1BmxT5gIh6pt1UwfQqp' ];
 
         $products = [
             [
                 'title' => 'Essential',
                 'stripe_id' => $options[0],
                 'type' => 'subscription',
-                'price' => 10.00,
+                'price' => 9.00,
             ],
             [
                 'title' => 'Premium',
                 'stripe_id' => $options[1],
                 'type' => 'subscription',
-                'price' => 100.00,
+                'price' => 15.00,
             ],
             [
                 'title' => 'Single Product',

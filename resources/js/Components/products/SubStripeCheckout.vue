@@ -3,15 +3,15 @@ import stripeApi from "@/api/stripe-api.js";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 defineProps({
-    product: {
-        type: Object,
+    productId: {
+        type: String,
         required: true,
     },
 });
 
 const changePageUrl = (id) => {
     stripeApi
-        .checkoutProduct({
+        .checkoutSubscription({
             id,
         })
         .then((res) => {
@@ -21,7 +21,7 @@ const changePageUrl = (id) => {
 </script>
 
 <template>
-    <PrimaryButton class="w-full" @click="changePageUrl(product.id)"
+    <PrimaryButton class="w-full" @click="changePageUrl(productId)"
         >Checkout
     </PrimaryButton>
 </template>
