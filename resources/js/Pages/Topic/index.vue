@@ -1,15 +1,9 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-defineOptions({ layout: AuthenticatedLayout });
-import { computed, onBeforeMount, onMounted, ref } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
-import {
-    Dialog,
-    DialogPanel,
-    TransitionChild,
-    TransitionRoot,
-} from "@headlessui/vue";
-import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
+import TopicLayout from "@/Layouts/TopicLayout.vue";
+
+defineOptions({ layout: TopicLayout });
+import { computed, onBeforeMount, ref } from "vue";
+import { Head } from "@inertiajs/vue3";
 import TopicSlide from "@/Components/slide/SlideItem.vue";
 import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
@@ -38,7 +32,6 @@ const props = defineProps({
 });
 
 const topicSlides = ref([]);
-const sidebarOpen = ref(false);
 const slideId = ref(null);
 
 const setSlide = (slide) => {
@@ -61,10 +54,10 @@ onBeforeMount(() => {
 
 <template>
     <Head :title="'Topic ' + topic.id" />
-    <div class="">
-        <div
-            class="hidden lg:fixed lg:inset-y-0 lg:top-16 lg:z-50 lg:flex lg:w-72 lg:flex-col"
-        >
+
+    <div class="flex w-full flex-col items-stretch bg-gray-50 lg:flex-row">
+        <TopicSlideMobileNav :topics="topics" :module="module" />
+        <div class="hidden h-full lg:block lg:w-1/5">
             <TopicSideNav
                 :topic="topic"
                 :topics="topics"
@@ -75,11 +68,9 @@ onBeforeMount(() => {
             />
         </div>
 
-        <TopicSlideMobileNav :topics="topics" :module="module" />
-
-        <main class="lg:pl-72">
+        <div class="h-full lg:w-4/5">
             <div class="grid grid-cols-2 xl:pl-0">
-                <div class="bg-blue-200 px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+                <div class="px-4 py-10 sm:px-6 lg:px-4 lg:py-6">
                     <TopicSlide
                         :topic="topic"
                         :slide="activeSlide"
@@ -90,6 +81,6 @@ onBeforeMount(() => {
                 </div>
                 <div>Resources</div>
             </div>
-        </main>
+        </div>
     </div>
 </template>
