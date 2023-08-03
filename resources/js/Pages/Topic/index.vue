@@ -29,6 +29,10 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    videos: {
+        type: Array,
+        required: false,
+    },
 });
 
 const topicSlides = ref([]);
@@ -79,7 +83,10 @@ onBeforeMount(() => {
                         @set-all-slides="setAllSlides"
                     />
                 </div>
-                <div>Resources</div>
+                <div>
+                    Videos
+                    {{ videos }}
+                </div>
             </div>
         </div>
     </div>

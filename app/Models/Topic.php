@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Resources\Video;
 use DoubleThreeDigital\Runway\Traits\HasRunwayResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,5 +32,10 @@ class Topic extends Model
     public function slides(): HasMany
     {
         return $this->hasMany(Slide::class)->orderBy('sort_order');;
+    }
+
+    public function videos(): BelongsToMany
+    {
+        return $this->belongsToMany(Video::class);
     }
 }

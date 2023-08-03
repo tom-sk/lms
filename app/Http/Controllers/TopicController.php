@@ -58,6 +58,7 @@ class TopicController extends Controller
             'topics' => $module->topics()->get(),
             'slide' => $slides[$activeSlideIndex],
             'slides' => $slides,
+            'videos' => $topic->videos()->get(),
         ]);
     }
 

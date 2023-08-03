@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slide_video', function (Blueprint $table) {
+        Schema::create('topic_video', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBiginteger('slide_id')->unsigned();
+            $table->unsignedBiginteger('topic_id')->unsigned();
             $table->unsignedBiginteger('video_id')->unsigned();
             $table->integer('sort_order')->nullable();
-            $table->foreign('slide_id')->references('id')
-                ->on('slides')->onDelete('cascade');
+            $table->foreign('topic_id')->references('id')
+                ->on('topics')->onDelete('cascade');
             $table->foreign('video_id')->references('id')
                 ->on('videos')->onDelete('cascade');
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slide_video');
+        Schema::dropIfExists('topic_video');
     }
 };
