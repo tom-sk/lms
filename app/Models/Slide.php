@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Resources\Video;
 use DoubleThreeDigital\Runway\Traits\HasRunwayResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,5 +33,10 @@ class Slide extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function videos(): BelongsToMany
+    {
+        return $this->belongsToMany(Video::class);
     }
 }

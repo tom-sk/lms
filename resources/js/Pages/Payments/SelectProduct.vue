@@ -67,10 +67,9 @@ const value = computed({
                                 <RadioGroupDescription
                                     as="span"
                                     class="mt-6 text-sm font-medium text-gray-900"
-                                    >{{
-                                        helpers.formatCurrency(product.price)
-                                    }}</RadioGroupDescription
                                 >
+                                    {{ helpers.formatCurrency(product.price) }}
+                                </RadioGroupDescription>
                             </span>
                         </span>
                         <CheckCircleIcon

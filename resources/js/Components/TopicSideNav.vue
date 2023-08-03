@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import { CheckCircleIcon } from "@heroicons/vue/24/outline";
+import { CheckCircleIcon, ChevronRightIcon } from "@heroicons/vue/24/outline";
 
 defineProps({
     module: {
@@ -68,21 +68,21 @@ const setSlide = (slide) => {
                                     <li
                                         v-for="slide in slides"
                                         :key="slide.id"
-                                        :class="{
-                                            'font-bold':
-                                                slide.id === activeSlide.id,
-                                        }"
                                         class="flex cursor-pointer"
                                         @click="setSlide(slide.id)"
                                     >
-                                        <CheckCircleIcon
-                                            :class="{
-                                                'text-green-600':
-                                                    slide.slide_complete,
-                                            }"
-                                            class="mr-4 h-6 w-6"
+                                        <ChevronRightIcon
+                                            v-if="slide.id === activeSlide.id"
+                                            class="h-6 w-6"
                                         />
-                                        {{ slide.title }}
+
+                                        <span
+                                            :class="{
+                                                'ml-6':
+                                                    slide.id !== activeSlide.id,
+                                            }"
+                                            >{{ slide.title }}</span
+                                        >
                                     </li>
                                 </ul>
                             </li>

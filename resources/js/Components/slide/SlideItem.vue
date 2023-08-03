@@ -74,25 +74,22 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
             </PrimaryButton>
 
             <div>
-                <!--                <PrimaryButton-->
-                <!--                    class="mr-4"-->
-                <!--                    @click="setSlide(slide.id, nextSlide)"-->
-                <!--                >-->
-                <!--                    Next-->
-                <!--                </PrimaryButton>-->
-
                 <PrimaryButton
                     v-if="!slide.slide_complete"
                     @click="setSlide(slide.id, nextSlide, true)"
                 >
+                    Complete
+                </PrimaryButton>
+                <PrimaryButton v-else @click="setSlide(slide.id, nextSlide)">
                     Next
                 </PrimaryButton>
-                <PrimaryButton
-                    v-else
-                    @click="setSlide(slide.id, nextSlide, false)"
-                >
-                    Un mark
-                </PrimaryButton>
+
+                <!--                <PrimaryButton-->
+                <!--                    v-else-->
+                <!--                    @click="setSlide(slide.id, nextSlide, false)"-->
+                <!--                >-->
+                <!--                    Un mark-->
+                <!--                </PrimaryButton>-->
             </div>
         </div>
     </div>
