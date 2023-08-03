@@ -7,6 +7,7 @@ import { Head } from "@inertiajs/vue3";
 import TopicSlide from "@/Components/slide/SlideItem.vue";
 import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
+import VimeoPlayer from "@/Components/video/VimeoPlayer.vue";
 
 const props = defineProps({
     module: {
@@ -84,8 +85,11 @@ onBeforeMount(() => {
                     />
                 </div>
                 <div>
-                    Videos
-                    {{ videos }}
+                    <div v-for="video in videos" :key="video.id" class="w-full">
+                        <div>
+                            <VimeoPlayer :video-url="video.url" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
