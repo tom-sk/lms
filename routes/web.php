@@ -47,19 +47,21 @@ Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('che
 
 
 
+Route::middleware(['auth'])->group(function () {
+//     Onboarding
+    Route::get('/onboard/payment', OnboardPaymentController::class)->name('onboard.payment');
+    Route::post('/onboard/payment', [OnboardPaymentController::class, 'store'])->name('onboard.payment');
 
-Route::middleware('auth')->group(function () {
+});
+
+Route::middleware(['auth', 'subscribed'])->group(function () {
 //
     Route::get('/sub-checkout', SubCheckoutController::class)->name('sub-checkout');
     Route::get('/sub-checkout/success', [SubCheckoutController::class, 'success'])->name('sub-checkout.success');
     Route::get('/sub-checkout/cancel', [SubCheckoutController::class, 'cancel'])->name('sub-checkout.cancel');
     Route::get('/sub-checkout/test', [SubCheckoutController::class, 'test'])->name('sub-checkout.test');
 
-
-
 //     Onboarding
-    Route::get('/onboard/payment', OnboardPaymentController::class)->name('onboard.payment');
-    Route::post('/onboard/payment', [OnboardPaymentController::class, 'store'])->name('onboard.payment');
     Route::get('/onboard/questions/1', QuestionsStepOneController::class)->name('onboard.questions.step-one');
     Route::post('/onboard/questions/1', [QuestionsStepOneController::class, 'store'])->name('onboard.questions.step-one');
     Route::get('/onboard/questions/2', QuestionsStepTwoController::class)->name('onboard.questions.step-two');
@@ -80,6 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscribe', [SubscriptionPaymentController::class, 'subscribe'])->name('subscribe');
     Route::post('/pay', [SubscriptionPaymentController::class, 'pay'])->name('pay');
 });
+
 
 
 
