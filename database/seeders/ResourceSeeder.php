@@ -12,13 +12,28 @@ class ResourceSeeder extends Seeder
      */
     public function run(): void
     {
-        Video::factory()
-            ->create([
-                'title' => 'What made you want to start your own business?',
+        $urls = ['https://vimeo.com/783453158', 'https://vimeo.com/850892699', 'https://vimeo.com/850813479'];
+
+        $videos = [
+            [
+                'title' => 'Video 1',
+                'url' => $urls[0],
                 'excerpt' => 'This is the excerpt',
-                'url' => 'https://player.vimeo.com/video/782293431?h=3962ee6b28&badge=0&autopause=0&player_id=0&app_id=58479',
-                'thumbnail' => 'computer-table.png',
-                'industry' => 'test-industry',
-            ]);
+            ],
+            [
+                'title' => 'Video 2',
+                'url' => $urls[1],
+                'excerpt' => 'This is the excerpt',
+            ],
+            [
+                'title' => 'Video 3',
+                'url' => $urls[2],
+                'excerpt' => 'This is the excerpt',
+            ],
+        ];
+
+        foreach ($videos as $video) {
+            Video::create($video);
+        }
     }
 }

@@ -38,9 +38,15 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
+        $topics = $module->topics()->get();
+
+        $topics->each(function ($topic) {
+            $topic->videos = $topic->videos()->get();
+        });
+
         return Inertia::render('Module/index', [
             'module' => $module,
-            'topics' => $module->topics()->get()
+            'topics' => $topics,
         ]);
     }
 

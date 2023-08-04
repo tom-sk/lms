@@ -87,7 +87,10 @@ onBeforeMount(() => {
                 <div>
                     <div v-for="video in videos" :key="video.id" class="w-full">
                         <div>
-                            <VimeoPlayer :video-url="video.url" />
+                            <VimeoPlayer
+                                class="w-full"
+                                :video-url="video.url"
+                            />
                         </div>
                     </div>
                 </div>

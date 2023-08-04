@@ -11,3 +11,9 @@ defineProps({
 <template>
     <vue-vimeo-player :video-url="videoUrl" />
 </template>
+
+<style>
+iframe {
+    width: 100% !important;
+}
+</style>
