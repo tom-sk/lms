@@ -4,10 +4,6 @@ import { computed } from "vue";
 const emit = defineEmits(["update:checked"]);
 
 const props = defineProps({
-    label: {
-        type: String,
-        default: "",
-    },
     checked: {
         type: Boolean,
         required: true,

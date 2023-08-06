@@ -9,7 +9,9 @@ defineProps({
 </script>
 
 <template>
-    <vue-vimeo-player :video-url="videoUrl" />
+    <div>
+        <vue-vimeo-player :video-url="videoUrl" />
+    </div>
 </template>
 
 <style>

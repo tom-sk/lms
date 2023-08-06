@@ -8,6 +8,7 @@ import TopicSlide from "@/Components/slide/SlideItem.vue";
 import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
 import VimeoPlayer from "@/Components/video/VimeoPlayer.vue";
+import VideoSlider from "@/Components/video/VideoSlider.vue";
 
 const props = defineProps({
     module: {
@@ -55,6 +56,14 @@ onBeforeMount(() => {
     setAllSlides(props.slides);
     setSlide(props.slide.id);
 });
+
+const activeVideo = ref(props.videos[0]);
+
+const setVideo = (video) => {
+    activeVideo.value = video;
+};
+
+const image = "/storage/" + activeVideo.value.thumbnail;
 </script>
 
 <template>
@@ -85,14 +94,19 @@ onBeforeMount(() => {
                     />
                 </div>
                 <div>
-                    <div v-for="video in videos" :key="video.id" class="w-full">
-                        <div>
-                            <VimeoPlayer
-                                class="w-full"
-                                :video-url="video.url"
-                            />
-                        </div>
+                    <div
+                        class="bg-cover bg-center"
+                        :style="{
+                            backgroundImage: 'url(' + image + ')',
+                        }"
+                    >
+                        <VimeoPlayer
+                            class="w-full"
+                            :video-url="activeVideo.url"
+                        />
                     </div>
+
+                    <VideoSlider :videos="videos" @set-video="setVideo" />
                 </div>
             </div>
         </div>
