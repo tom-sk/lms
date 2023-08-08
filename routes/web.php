@@ -59,7 +59,6 @@ Route::middleware(['auth', 'subscribed'])->group(function () {
     Route::get('/sub-checkout', SubCheckoutController::class)->name('sub-checkout');
     Route::get('/sub-checkout/success', [SubCheckoutController::class, 'success'])->name('sub-checkout.success');
     Route::get('/sub-checkout/cancel', [SubCheckoutController::class, 'cancel'])->name('sub-checkout.cancel');
-    Route::get('/sub-checkout/test', [SubCheckoutController::class, 'test'])->name('sub-checkout.test');
 
 //     Onboarding
     Route::get('/onboard/questions/1', QuestionsStepOneController::class)->name('onboard.questions.step-one');

@@ -14,7 +14,7 @@ class SubCheckoutController extends Controller
        $product = Product::find($data->id);
 
         $session = auth()->user()
-            ->newSubscription($product->title, $product->stripe_id)
+            ->newSubscription('default', $product->stripe_id)
             ->allowPromotionCodes()
             ->checkout([
                 'success_url' => route('onboard.questions.step-one'),
@@ -26,14 +26,5 @@ class SubCheckoutController extends Controller
 
     public function cancel(){
         return redirect()->back();
-    }
-
-    public function test(Request $request){
-        return $request->user()
-            ->newSubscription('essential', 'price_1NZI5HBmxT5gIh6ph91MRYo8')
-            ->checkout([
-                'success_url' => route('onboard.questions.step-one'),
-                'cancel_url' => route('sub-checkout.cancel', [], true),
-            ]);
     }
 }
