@@ -52,7 +52,7 @@ const setVideo = (video) => {
                         <Slide
                             v-for="video in videos"
                             :key="video.id"
-                            class="h-32 bg-red-100"
+                            class="h-32"
                         >
                             <div class="p-4" @click="setVideo(video)">
                                 <img

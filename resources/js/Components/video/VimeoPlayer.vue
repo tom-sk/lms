@@ -9,13 +9,24 @@ defineProps({
 </script>
 
 <template>
-    <div>
+    <div class="video relative">
         <vue-vimeo-player :video-url="videoUrl" />
     </div>
 </template>
 
 <style>
+.video {
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+}
+
 iframe {
-    width: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 </style>

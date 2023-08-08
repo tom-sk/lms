@@ -93,17 +93,19 @@ const image = "/storage/" + activeVideo.value.thumbnail;
                         @set-all-slides="setAllSlides"
                     />
                 </div>
-                <div>
-                    <div
-                        class="bg-cover bg-center"
-                        :style="{
-                            backgroundImage: 'url(' + image + ')',
-                        }"
-                    >
-                        <VimeoPlayer
-                            class="w-full"
-                            :video-url="activeVideo.url"
-                        />
+                <div class="pt-4">
+                    <div class="mb-8 rounded-2xl bg-white p-4">
+                        <div
+                            class="bg-cover bg-center"
+                            :style="{
+                                backgroundImage: 'url(' + image + ')',
+                            }"
+                        >
+                            <VimeoPlayer
+                                class="w-full"
+                                :video-url="activeVideo.url"
+                            />
+                        </div>
                     </div>
 
                     <VideoSlider :videos="videos" @set-video="setVideo" />
