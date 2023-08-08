@@ -35,12 +35,12 @@ const productId = ref(props.products[0].id);
 
             <SubStripeCheckout v-if="productId" :product-id="productId" />
 
-            <CouponVerification />
+            <!--            <CouponVerification />-->
 
-            <SubscriptionCardDetails
-                :product-id="productId"
-                :secret="intent.client_secret"
-            />
+            <!--            <SubscriptionCardDetails-->
+            <!--                :product-id="productId"-->
+            <!--                :secret="intent.client_secret"-->
+            <!--            />-->
         </div>
     </div>
 </template>

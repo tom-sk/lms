@@ -16,7 +16,8 @@
         "spatie/laravel-stripe-webhooks": "^3.3",
         "statamic/cms": "^4.9",
         "stillat/antlers-components": "^2.0",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "laravel/spark-stripe": "^4.1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -80,5 +81,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://spark.laravel.com"
+        }
+    ]
 }

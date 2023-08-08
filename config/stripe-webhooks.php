@@ -27,8 +27,8 @@ return [
      */
     'jobs' => [
         'checkout_session_completed' => HandleCheckoutSession::class,
-        'customer_subscription_created' =>  HandleCustomerSubscriptionCreated::class,
-        'customer_subscription_updated' =>  HandleCustomerSubscriptionUpdated::class,
+//        'customer_subscription_created' =>  HandleCustomerSubscriptionCreated::class,
+//        'customer_subscription_updated' =>  HandleCustomerSubscriptionUpdated::class,
 //         'source_chargeable' => \App\Jobs\StripeWebhooks\HandleChargeableSource::class,
         // 'charge_failed' => \App\Jobs\StripeWebhooks\HandleFailedCharge::class,
     ],
