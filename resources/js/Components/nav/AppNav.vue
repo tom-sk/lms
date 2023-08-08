@@ -68,6 +68,9 @@ const showingNavigationDropdown = ref(false);
                                 <DropdownLink :href="route('profile.edit')">
                                     Profile
                                 </DropdownLink>
+                                <DropdownLink href="/billing">
+                                    Billing
+                                </DropdownLink>
                                 <DropdownLink
                                     :href="route('logout')"
                                     method="post"
