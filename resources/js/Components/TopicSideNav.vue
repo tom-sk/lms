@@ -53,7 +53,7 @@ const setSlide = (slide) => {
                                 }"
                             >
                                 <Link
-                                    class="text-lg font-bold"
+                                    class="cursor-pointer text-lg font-bold transition-opacity hover:opacity-75"
                                     :href="
                                         route('module.topics', {
                                             module: module.id,
@@ -68,7 +68,7 @@ const setSlide = (slide) => {
                                     <li
                                         v-for="slide in slides"
                                         :key="slide.id"
-                                        class="flex cursor-pointer"
+                                        class="flex cursor-pointer transition-opacity hover:opacity-75"
                                         @click="setSlide(slide.id)"
                                     >
                                         <ChevronRightIcon

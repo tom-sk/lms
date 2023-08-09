@@ -1,10 +1,15 @@
 <script setup>
 import TopicLayout from "@/Layouts/TopicLayout.vue";
-
 defineOptions({ layout: TopicLayout });
-import { computed, onBeforeMount, ref } from "vue";
+
+import { useSlidesStore } from "@/stores/slides.js";
+import { storeToRefs } from "pinia";
+const slidesStore = useSlidesStore();
+const { topicSlides, activeSlide } = storeToRefs(slidesStore);
+const { setSlide, setAllSlides, setTopic } = slidesStore;
+import { onBeforeMount, ref } from "vue";
 import { Head } from "@inertiajs/vue3";
-import TopicSlide from "@/Components/slide/SlideItem.vue";
+import SlideItem from "@/Components/slide/SlideItem.vue";
 import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
 import VimeoPlayer from "@/Components/video/VimeoPlayer.vue";
@@ -34,27 +39,8 @@ const props = defineProps({
     videos: {
         type: Array,
         required: false,
+        default: () => [],
     },
-});
-
-const topicSlides = ref([]);
-const slideId = ref(null);
-
-const setSlide = (slide) => {
-    slideId.value = slide;
-};
-
-const activeSlide = computed(() => {
-    return topicSlides.value.find((slide) => slide.id === slideId.value);
-});
-
-const setAllSlides = (slides) => {
-    topicSlides.value = slides;
-};
-
-onBeforeMount(() => {
-    setAllSlides(props.slides);
-    setSlide(props.slide.id);
 });
 
 const activeVideo = ref(props.videos[0]);
@@ -64,6 +50,12 @@ const setVideo = (video) => {
 };
 
 const image = "/storage/" + activeVideo.value.thumbnail;
+
+onBeforeMount(() => {
+    setAllSlides(props.slides);
+    setSlide(props.slide.id);
+    setTopic(props.topic);
+});
 </script>
 
 <template>
@@ -85,7 +77,7 @@ const image = "/storage/" + activeVideo.value.thumbnail;
         <div class="h-full lg:w-4/5">
             <div class="grid grid-cols-2 xl:pl-0">
                 <div class="px-4 py-10 sm:px-6 lg:px-4 lg:py-6">
-                    <TopicSlide
+                    <SlideItem
                         :topic="topic"
                         :slide="activeSlide"
                         :slides="topicSlides"
