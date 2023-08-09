@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import CheckBox from "@/Components/form/CheckBox.vue";
+import FormCheckBox from "@/Components/form/FormCheckBox.vue";
 
 const props = defineProps({
     options: {
@@ -28,7 +28,7 @@ const checkedValues = computed({
 <template>
     <div class="flex flex-col">
         <label v-for="(item, index) in options" :key="index">
-            <CheckBox v-model="checkedValues" :value="item" />
+            <FormCheckBox v-model="checkedValues" :value="item" />
             {{ item }}
         </label>
     </div>

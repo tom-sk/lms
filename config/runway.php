@@ -3,6 +3,7 @@
 use App\Models\Module;
 use App\Models\Onboard\Question;
 use App\Models\Product;
+use App\Models\Resources\Video;
 use App\Models\Slide;
 use App\Models\Topic;
 
@@ -44,7 +45,13 @@ return [
             'name' => 'Products',
             'cp_icon' => 'date',
             'blueprint' => 'products'
+        ],
+        Video::class => [
+            'name' => 'Video',
+            'cp_icon' => 'date',
+            'blueprint' => 'videos'
         ]
+
         // \App\Models\Order::class => [
         //     'name' => 'Orders',
 

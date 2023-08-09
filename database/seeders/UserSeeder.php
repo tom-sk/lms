@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Module;
 use App\Models\Onboard\Question;
+use App\Models\Resources\Video;
 use App\Models\Slide;
 use App\Models\Topic;
 use Database\Factories\UserFactory;
@@ -30,6 +31,8 @@ class UserSeeder extends Seeder
                         Slide::factory()
                             ->count(3)
                     )
+                    ->hasVideos(3)
+
             )
             ->create();
 

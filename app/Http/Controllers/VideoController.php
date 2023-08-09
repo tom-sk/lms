@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Module;
+use App\Models\Resources\Video;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 
-class ModuleController extends Controller
+class VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,24 +34,15 @@ class ModuleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Module $module)
+    public function show(Video $video)
     {
-        $topics = $module->topics()->get();
-
-        $topics->each(function ($topic) {
-            $topic->videos = $topic->videos()->get();
-        });
-
-        return Inertia::render('Module/index', [
-            'module' => $module,
-            'topics' => $topics,
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Module $module)
+    public function edit(Video $video)
     {
         //
     }
@@ -61,19 +50,15 @@ class ModuleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Module $module)
+    public function update(Request $request, Video $video)
     {
-        $user = Auth::user();
-
-        $user->modules()->save($module);
-
-        return to_route('dashboard');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Module $module)
+    public function destroy(Video $video)
     {
         //
     }

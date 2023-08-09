@@ -52,7 +52,9 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
 </script>
 
 <template>
-    <div>
+    <div
+        class="rounded-xl border-2 border-dashed border-green-300 bg-white p-8"
+    >
         <h3 class="mb-12 flex text-2xl font-bold">
             <CheckIcon v-if="slide.slide_complete" class="mr-4 h-6 w-6" />
 
@@ -73,24 +75,21 @@ const setSlide = (currentSlideId, nextSlide, complete) => {
 
             <div>
                 <PrimaryButton
-                    class="mr-4"
-                    @click="setSlide(slide.id, nextSlide)"
-                >
-                    Next
-                </PrimaryButton>
-
-                <PrimaryButton
                     v-if="!slide.slide_complete"
                     @click="setSlide(slide.id, nextSlide, true)"
                 >
-                    Mark as complete
+                    Complete
                 </PrimaryButton>
-                <PrimaryButton
-                    v-else
-                    @click="setSlide(slide.id, nextSlide, false)"
-                >
-                    Un mark
+                <PrimaryButton v-else @click="setSlide(slide.id, nextSlide)">
+                    Next
                 </PrimaryButton>
+
+                <!--                <PrimaryButton-->
+                <!--                    v-else-->
+                <!--                    @click="setSlide(slide.id, nextSlide, false)"-->
+                <!--                >-->
+                <!--                    Un mark-->
+                <!--                </PrimaryButton>-->
             </div>
         </div>
     </div>

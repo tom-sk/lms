@@ -9,6 +9,7 @@ export default {
         "./resources/views/**/*.blade.php",
         "./resources/**/*.antlers.html",
         "./resources/js/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
     ],
 
     theme: {
@@ -45,6 +46,7 @@ export default {
                     500: "#376d94",
                 },
                 gray: {
+                    50: "#cad4d3",
                     100: "#fdfdfd",
                     200: "#f8f8f8",
                     300: "#b6b6b6",
@@ -53,10 +55,16 @@ export default {
                     600: "#707070",
                 },
                 green: {
-                    100: "#9CCC65",
-                    200: "#73BEB7",
-                    300: "#1ea69b",
-                    500: "#0B5145",
+                    // Placeholder colors
+                    100: "#b6b6b6",
+                    200: "#b6b6b6",
+                    300: "#656565",
+                    500: "#717171",
+                    // Real greens
+                    // 100: "#9CCC65",
+                    // 200: "#73BEB7",
+                    // 300: "#1ea69b",
+                    // 500: "#0B5145",
                 },
             },
         },

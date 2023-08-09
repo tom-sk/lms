@@ -78,4 +78,37 @@ tabs:
               instructions_position: above
               visibility: visible
               hide_display: false
-
+          -
+            handle: videos
+            field:
+              mode: default
+              resource: video
+              create: true
+              reorderable: true
+              order_column: sort_order
+              type: has_many
+              display: Videos
+              icon: has_many
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true

@@ -39,7 +39,7 @@ const sidebarOpen = ref(false);
                 leave-from="opacity-100"
                 leave-to="opacity-0"
             >
-                <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+                <div class="bg-black/50 fixed inset-0 backdrop-blur-sm" />
             </TransitionChild>
 
             <div class="fixed inset-0 flex">
@@ -87,7 +87,7 @@ const sidebarOpen = ref(false);
                             <nav class="flex flex-1 flex-col">
                                 <ul
                                     role="list"
-                                    class="flex flex-1 flex-col gap-y-7"
+                                    class="bg-red flex flex-1 flex-col gap-y-7"
                                 >
                                     <li>
                                         <ul role="list" class="-mx-2 space-y-1">

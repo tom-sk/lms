@@ -26,6 +26,7 @@ defineProps({
             class="flex flex-col items-center"
         >
             {{ topic.title }}
+
             <Link
                 :href="
                     route('module.topics', {
