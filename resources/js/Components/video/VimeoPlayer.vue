@@ -9,18 +9,12 @@ defineProps({
 </script>
 
 <template>
-    <div class="video relative">
+    <div class="relative pb-[56.25%]">
         <vue-vimeo-player :video-url="videoUrl" />
     </div>
 </template>
 
 <style>
-.video {
-    height: 0;
-    overflow: hidden;
-    padding-bottom: 56.25%;
-}
-
 iframe {
     position: absolute;
     top: 0;
