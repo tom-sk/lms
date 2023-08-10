@@ -1,6 +1,7 @@
 <script setup>
 import FlashMsgContainer from "@/Components/flash/FlashMsgContainer.vue";
 import AppNav from "@/Components/nav/AppNav.vue";
+import TopicBreadCrumbs from "@/Components/topics/TopicBreadCrumbs.vue";
 </script>
 
 <template>
@@ -8,15 +9,10 @@ import AppNav from "@/Components/nav/AppNav.vue";
         <div class="flex min-h-screen flex-col bg-gray-200">
             <AppNav />
 
-            <!-- Page Heading -->
-            <header v-if="$slots.header" class="bg-white shadow">
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+            <TopicBreadCrumbs />
 
             <!-- Page Content -->
-            <main class="flex grow">
+            <main class="flex h-full grow">
                 <slot />
             </main>
         </div>

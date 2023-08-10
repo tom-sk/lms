@@ -63,6 +63,7 @@ export const useSlidesStore = defineStore("slides", () => {
         slideId,
         activeSlide,
         topics,
+        topic,
         module,
         nextTopic,
         setModule,
