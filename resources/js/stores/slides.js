@@ -3,7 +3,9 @@ import { computed, ref } from "vue";
 import slideApi from "@/api/slide-api.js";
 
 export const useSlidesStore = defineStore("slides", () => {
+    const module = ref(null);
     const topic = ref(null);
+    const topics = ref([]);
     const topicSlides = ref([]);
     const slideId = ref(null);
 
@@ -21,6 +23,14 @@ export const useSlidesStore = defineStore("slides", () => {
 
     const setTopic = (newTopic) => {
         topic.value = newTopic;
+    };
+
+    const setTopics = (newTopics) => {
+        topics.value = newTopics;
+    };
+
+    const setModule = (mod) => {
+        module.value = mod;
     };
 
     const setSlideAPI = (currentSlideId, newSlide, complete) => {
@@ -42,10 +52,21 @@ export const useSlidesStore = defineStore("slides", () => {
             });
     };
 
+    const nextTopic = computed(() => {
+        const index = topics.value.findIndex((s) => s.id === topic.value.id);
+
+        return topics.value[index + 1];
+    });
+
     return {
         topicSlides,
         slideId,
         activeSlide,
+        topics,
+        module,
+        nextTopic,
+        setModule,
+        setTopics,
         setSlide,
         setAllSlides,
         setSlideAPI,

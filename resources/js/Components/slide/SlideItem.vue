@@ -1,8 +1,6 @@
 <script setup>
 import { CheckIcon } from "@heroicons/vue/20/solid/index.js";
 import BardContainer from "@/Components/bard/BardContainer.vue";
-
-import { useSlidesStore } from "@/stores/slides.js";
 import SlideNavContainer from "@/Components/slide/SlideNavContainer.vue";
 
 defineProps({

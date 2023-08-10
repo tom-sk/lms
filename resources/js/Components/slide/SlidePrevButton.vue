@@ -21,7 +21,7 @@ const prevSlide = computed(() => {
 </script>
 
 <template>
-    <PrimaryButton @click="setSlideAPI(slide.id, prevSlide)">
+    <PrimaryButton v-if="prevSlide" @click="setSlideAPI(slide.id, prevSlide)">
         Previous
     </PrimaryButton>
 </template>

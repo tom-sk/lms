@@ -1,10 +1,8 @@
 <script setup>
 import SlideNextButton from "@/Components/slide/SlideNextButton.vue";
-import { computed } from "vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SlidePrevButton from "@/Components/slide/SlidePrevButton.vue";
 
-const props = defineProps({
+defineProps({
     slide: {
         type: Object,
         required: true,
@@ -20,7 +18,7 @@ const props = defineProps({
     <div class="flex w-full justify-between">
         <SlidePrevButton :slide="slide" :topic="topic" />
 
-        <SlideNextButton :slide="slide" :topic="topic" />
+        <SlideNextButton class="ml-auto" :slide="slide" :topic="topic" />
     </div>
 
     <!--                <PrimaryButton-->

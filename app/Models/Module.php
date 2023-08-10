@@ -19,6 +19,11 @@ class Module extends Model
         'enrolled'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function topics(): BelongsToMany
     {
         return $this->belongsToMany(Topic::class)

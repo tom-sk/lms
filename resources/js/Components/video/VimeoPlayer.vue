@@ -1,5 +1,6 @@
 <script setup>
 import { vueVimeoPlayer } from "vue-vimeo-player";
+
 defineProps({
     videoUrl: {
         type: String,
@@ -10,7 +11,7 @@ defineProps({
 
 <template>
     <div class="relative pb-[56.25%]">
-        <vue-vimeo-player :video-url="videoUrl" />
+        <vueVimeoPlayer :video-url="videoUrl" />
     </div>
 </template>
 

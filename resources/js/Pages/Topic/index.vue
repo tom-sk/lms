@@ -6,7 +6,7 @@ import { useSlidesStore } from "@/stores/slides.js";
 import { storeToRefs } from "pinia";
 const slidesStore = useSlidesStore();
 const { topicSlides, activeSlide } = storeToRefs(slidesStore);
-const { setSlide, setAllSlides, setTopic } = slidesStore;
+const { setSlide, setAllSlides, setTopic, setTopics, setModule } = slidesStore;
 import { onBeforeMount, ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import SlideItem from "@/Components/slide/SlideItem.vue";
@@ -55,6 +55,8 @@ onBeforeMount(() => {
     setAllSlides(props.slides);
     setSlide(props.slide.id);
     setTopic(props.topic);
+    setTopics(props.topics);
+    setModule(props.module);
 });
 </script>
 
@@ -81,8 +83,6 @@ onBeforeMount(() => {
                         :topic="topic"
                         :slide="activeSlide"
                         :slides="topicSlides"
-                        @set-slide="setSlide"
-                        @set-all-slides="setAllSlides"
                     />
                 </div>
                 <div class="pt-4">
