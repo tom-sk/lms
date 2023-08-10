@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SlideUpdateRequest;
+use App\Models\Module;
 use App\Models\Slide;
 use App\Models\Topic;
 use Illuminate\Http\Request;
@@ -60,20 +61,19 @@ class SlideController extends Controller
     public function update(SlideUpdateRequest $request)
     {
         $user = Auth::user();
-
-        $requestData = [...$request->safe()->all()];
+        $requestData = $request->toDto();
 
 //        Create the data for the pivot table sync
-        if(array_key_exists('slide_complete', $requestData)) {
-            $data = [$requestData['slide_id'] => ['slide_complete' => $requestData['slide_complete']]];
+        if(!is_null($requestData->slideComplete) && $requestData->slideComplete) {
+            $data = [$requestData->slideId => ['slide_complete' => $requestData->slideComplete]];
         } else {
-            $data = $requestData['slide_id'];
+            $data = $requestData->slideId;
         }
 
         $user->slides()->syncWithoutDetaching($data);
 
 //        Return the updated slides
-        $topic = Topic::find($requestData['topic_id']);
+        $topic = Topic::find($requestData->topicId);
         $slides = $topic->slides()->get();
 
         $userSlides = $user->completedSlides()->get();
@@ -82,8 +82,11 @@ class SlideController extends Controller
             $slide['slide_complete'] = $userSlides->contains($slide);
         });
 
+        $moduleProgress = Module::find($requestData->moduleId)->progress();
+
         return response()->json([
-            'slides' => $slides
+            'slides' => $slides,
+            'moduleProgress' => $moduleProgress,
         ], Response::HTTP_OK);
     }
 

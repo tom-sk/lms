@@ -39,12 +39,19 @@ export const useSlidesStore = defineStore("slides", () => {
         moduleProgress.value = progress;
     };
 
+    const setSlideAPIPrev = (currentSlideId, newSlide) => {
+        if (newSlide && newSlide.id) {
+            setSlide(newSlide.id);
+        }
+    };
+
     const setSlideAPI = (currentSlideId, newSlide, complete) => {
         slideApi
             .setSlideState({
-                slide_id: currentSlideId,
-                slide_complete: complete,
-                topic_id: topic.value.id,
+                slideId: currentSlideId,
+                slideComplete: complete,
+                topicId: topic.value.id,
+                moduleId: module.value.id,
             })
             .then((res) => {
                 if (nextSlide.value === null && nextTopic.value !== null) {
@@ -57,6 +64,7 @@ export const useSlidesStore = defineStore("slides", () => {
                 }
 
                 setAllSlides(res.data.slides);
+                setProgress(res.data.moduleProgress);
 
                 if (newSlide && newSlide.id) {
                     setSlide(newSlide.id);
@@ -98,6 +106,7 @@ export const useSlidesStore = defineStore("slides", () => {
         setSlide,
         setAllSlides,
         setSlideAPI,
+        setSlideAPIPrev,
         setTopic,
         setProgress,
     };

@@ -37,14 +37,12 @@ const setSlide = (slide) => {
     <div class="min-h-full bg-green-300">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div
-            class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-green-200 font-bold text-white"
+            class="flex grow flex-col overflow-y-auto border-r border-gray-200 bg-green-200 font-bold text-white"
         >
-            <div>
-                <TopicProgress />
-            </div>
+            <TopicProgress />
 
             <nav class="flex flex-1 flex-col">
-                <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                <ul role="list" class="flex flex-1 flex-col">
                     <li>
                         <ul role="list" class="">
                             <li

@@ -47,8 +47,6 @@ class TopicController extends Controller
         $userSlides = $user->completedSlides()->get();
 
 
-
-
         $slides->each(function ($slide) use ($userSlides) {
             $slide['slide_complete'] = $userSlides->contains($slide);
         });

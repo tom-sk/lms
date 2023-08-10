@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { useSlidesStore } from "@/stores/slides.js";
 import { storeToRefs } from "pinia";
 const slidesStore = useSlidesStore();
-const { setSlideAPI } = slidesStore;
+const { setSlideAPIPrev } = slidesStore;
 const { topicSlides } = storeToRefs(slidesStore);
 
 const props = defineProps({
@@ -21,7 +21,10 @@ const prevSlide = computed(() => {
 </script>
 
 <template>
-    <PrimaryButton v-if="prevSlide" @click="setSlideAPI(slide.id, prevSlide)">
+    <PrimaryButton
+        v-if="prevSlide"
+        @click="setSlideAPIPrev(slide.id, prevSlide)"
+    >
         Previous
     </PrimaryButton>
 </template>
