@@ -6,7 +6,8 @@ import { useSlidesStore } from "@/stores/slides.js";
 import { storeToRefs } from "pinia";
 const slidesStore = useSlidesStore();
 const { topicSlides, activeSlide } = storeToRefs(slidesStore);
-const { setSlide, setAllSlides, setTopic, setTopics, setModule } = slidesStore;
+const { setSlide, setAllSlides, setTopic, setTopics, setModule, setProgress } =
+    slidesStore;
 import { onBeforeMount, ref } from "vue";
 import { Head } from "@inertiajs/vue3";
 import SlideItem from "@/Components/slide/SlideItem.vue";
@@ -18,6 +19,10 @@ import VideoSlider from "@/Components/video/VideoSlider.vue";
 const props = defineProps({
     module: {
         type: Object,
+        required: true,
+    },
+    moduleProgress: {
+        type: Number,
         required: true,
     },
     topic: {
@@ -57,6 +62,7 @@ onBeforeMount(() => {
     setTopic(props.topic);
     setTopics(props.topics);
     setModule(props.module);
+    setProgress(props.moduleProgress);
 });
 </script>
 

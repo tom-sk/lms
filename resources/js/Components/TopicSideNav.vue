@@ -1,6 +1,7 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
 import { CheckCircleIcon, ChevronRightIcon } from "@heroicons/vue/24/outline";
+import TopicProgress from "@/Components/topics/TopicProgress.vue";
 
 defineProps({
     module: {
@@ -38,6 +39,10 @@ const setSlide = (slide) => {
         <div
             class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-green-200 font-bold text-white"
         >
+            <div>
+                <TopicProgress />
+            </div>
+
             <nav class="flex flex-1 flex-col">
                 <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li>

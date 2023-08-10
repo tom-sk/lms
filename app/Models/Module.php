@@ -6,6 +6,7 @@ use DoubleThreeDigital\Runway\Traits\HasRunwayResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Auth;
 use Statamic\Http\Resources\CP\Users\Users;
 
 class Module extends Model
@@ -33,5 +34,23 @@ class Module extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(Users::class);
+    }
+
+    public function progress()
+    {
+        $moduleTopics = $this->topics()->get();
+
+        $totalCompleteSlides = $moduleTopics->sum(function (Topic $topic) {
+            return $topic->slidesComplete();
+        });
+
+        $moduleSlides = $moduleTopics->sum(function (Topic $topic) {
+            return $topic->totalSlides();
+        });
+
+        $moduleCompletePercent = ($totalCompleteSlides / $moduleSlides) * 100;
+
+
+        return round($moduleCompletePercent, 2);
     }
 }

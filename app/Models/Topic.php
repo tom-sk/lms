@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Topic extends Model
 {
@@ -34,8 +35,25 @@ class Topic extends Model
         return $this->hasMany(Slide::class)->orderBy('sort_order');;
     }
 
+    public function totalSlides()
+    {
+        return $this->slides()->count();
+    }
+
     public function videos(): BelongsToMany
     {
         return $this->belongsToMany(Video::class);
+    }
+
+    public function slidesComplete()
+    {
+        $user = Auth::user();
+        $slides = $this->slides->pluck('id')->toArray();
+        $totalSlides = count($slides);
+
+        $completedSlides = $user->completedSlides()->pluck('slide_id')->toArray();
+        $diff = count(array_diff($slides, $completedSlides));
+
+        return $totalSlides - $diff;
     }
 }

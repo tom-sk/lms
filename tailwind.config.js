@@ -34,7 +34,7 @@ export default {
                     200: "#AB47BC",
                     300: "#692169",
                 },
-                black: colors.black,
+                black: "#333",
                 red: {
                     300: "#e52629",
                 },
