@@ -24,6 +24,7 @@ class HandleCheckoutSession implements ShouldQueue
 
     public function handle()
     {
+        /** @phpstan-ignore-next-line */
         $stripeObject = Event::constructFrom($this->webhookCall->payload)->data?->object;
 
         $order = Order::where('session_id', $stripeObject->id)->first();

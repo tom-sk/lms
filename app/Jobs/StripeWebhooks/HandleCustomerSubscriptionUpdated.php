@@ -24,6 +24,7 @@ class HandleCustomerSubscriptionUpdated implements ShouldQueue
 
     public function handle()
     {
+        /** @phpstan-ignore-next-line */
         $stripeObject = Event::constructFrom($this->webhookCall->payload)->data?->object;
 
         $user = User::where('stripe_id', $stripeObject->customer)->first();

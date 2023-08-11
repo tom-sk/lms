@@ -26,6 +26,8 @@ function submit(id) {
                     {{ module.title }}
                 </p>
 
+                <span v-if="module.progress > 0"> {{ module.progress }}%</span>
+
                 <form
                     v-if="!module.enrolled"
                     @submit.prevent="submit(module.id)"

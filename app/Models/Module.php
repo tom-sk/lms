@@ -40,6 +40,10 @@ class Module extends Model
     {
         $moduleTopics = $this->topics()->get();
 
+        if(count($moduleTopics) === 0){
+            return 0;
+        }
+
         $totalCompleteSlides = $moduleTopics->sum(function (Topic $topic) {
             return $topic->slidesComplete();
         });

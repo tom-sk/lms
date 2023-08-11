@@ -41,9 +41,9 @@ class ModuleController extends Controller
         $topics = $module->topics()->get();
 
         $topics->each(function ($topic) {
-            $topic->videos = $topic->videos()->get();
-            $topic->progress = $topic->progress();
-            $topic->slideCount = $topic->totalSlides();
+            $topic['videos'] = $topic->videos()->get();
+            $topic['progress'] = $topic->progress();
+            $topic['slideCount'] = $topic->totalSlides();
         });
 
         return Inertia::render('Module/index', [

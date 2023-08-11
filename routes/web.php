@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'subscribed'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 //
     Route::get('/sub-checkout', SubCheckoutController::class)->name('sub-checkout');
     Route::get('/sub-checkout/success', [SubCheckoutController::class, 'success'])->name('sub-checkout.success');
