@@ -56,4 +56,12 @@ class Topic extends Model
 
         return $totalSlides - $diff;
     }
+
+    public function progress()
+    {
+        $slidesComplete = $this->slidesComplete();
+        $totalSlides = $this->slides()->count();
+
+        return round(($slidesComplete / $totalSlides) * 100);
+    }
 }

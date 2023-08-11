@@ -16,7 +16,7 @@ import AppNav from "@/Components/nav/AppNav.vue";
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="mx-auto max-w-7xl">
                 <slot />
             </main>
         </div>

@@ -51,6 +51,6 @@ class Module extends Model
         $moduleCompletePercent = ($totalCompleteSlides / $moduleSlides) * 100;
 
 
-        return round($moduleCompletePercent, 2);
+        return round($moduleCompletePercent);
     }
 }
