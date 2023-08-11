@@ -16,6 +16,17 @@ class Customer extends Model
         'email',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'stripe_id',
+        'email_verified_at',
+        'pm_type',
+        'pm_last_four',
+        'trial_ends_at',
+        'last_login'
+    ];
+
     public function orders(): MorphOne
     {
         return $this->morphOne(Order::class, 'customer');

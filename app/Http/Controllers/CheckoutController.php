@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Stripe\Stripe;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,25 +17,37 @@ class CheckoutController extends Controller
     public function __invoke(Request $request){
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
+
         $request->validate([
             'id' => 'required|int|max:255|exists:products,id',
         ]);
 
+
+
         $product = Product::find($request->id);
 
-//        $lineItems = [];
-        $lineItems[] = [
-            'price' => 'price_1NYUrmBmxT5gIh6pYtuvveae',
-            'quantity' => 1,
-        ];
+        if(Auth::check()){
+            $session = Auth::user()->checkout([$product->stripe_id => 1], [
+                'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
+                'cancel_url' => route('checkout.cancel', [], true),
+                'allow_promotion_codes' => true,
+            ]);
 
-        $session = \Stripe\Checkout\Session::create([
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => route('checkout.cancel', [], true),
-            'allow_promotion_codes' => true,
-        ]);
+         } else {
+            $lineItems[] = [
+                'price' => $product->stripe_id,
+                'quantity' => 1,
+            ];
+
+            $session = \Stripe\Checkout\Session::create([
+                'line_items' => $lineItems,
+                'mode' => 'payment',
+                'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
+                'cancel_url' => route('checkout.cancel', [], true),
+                'allow_promotion_codes' => true,
+            ]);
+        }
+
 
         $order = new Order();
         $order->status = 'unpaid';
@@ -79,7 +92,9 @@ class CheckoutController extends Controller
                 throw new NotFoundHttpException();
             }
 
-            return Inertia::render('Product/Success',  compact('customer'));
+            $product = Product::find($order->product_id);
+
+            return Inertia::render('Product/Success',  compact(['product']));
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }

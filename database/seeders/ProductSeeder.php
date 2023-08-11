@@ -30,7 +30,9 @@ class ProductSeeder extends Seeder
             [
                 'title' => 'Single Product',
                 'type' => 'single',
-                'price' => 12.00,
+                'stripe_id' => 'price_1NYUrmBmxT5gIh6pYtuvveae',
+                'price' => 17.00,
+                'asset' => 'https://picsum.photos/200/300',
             ],
         ];
 
