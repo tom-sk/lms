@@ -5,6 +5,7 @@ import { Head, Link } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { FireIcon } from "@heroicons/vue/24/outline/index.js";
 import ProgressBar from "@/Components/ProgressBar.vue";
+import BardContainer from "@/Components/bard/BardContainer.vue";
 
 defineProps({
     module: {
@@ -28,7 +29,8 @@ defineProps({
     <div class="p-4">
         <div class="rounded-md bg-white p-8">
             <h1 class="mb-8 text-3xl font-bold">{{ module.title }}</h1>
-            <p class="mb-8">Module content</p>
+
+            <BardContainer :content="module.content" />
 
             <ProgressBar class="mb-12" :progress="progress" />
 

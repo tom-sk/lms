@@ -26,10 +26,7 @@ defineProps({
         </h3>
 
         <div>
-            <BardContainer
-                v-if="slide.content"
-                :content="JSON.parse(slide.content)"
-            />
+            <BardContainer v-if="slide.content" :content="slide.content" />
         </div>
 
         <SlideNavContainer :slide="slide" :topic="topic" />

@@ -2,17 +2,22 @@
 import BardText from "@/Components/bard/BardText.vue";
 import BardTable from "@/Components/bard/BardTable.vue";
 import BardSet from "@/Components/bard/BardSet.vue";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
     content: {
-        type: Array,
+        type: String,
         required: true,
     },
+});
+
+const formattedContent = computed(() => {
+    return JSON.parse(props.content);
 });
 </script>
 
 <template>
-    <template v-for="(item, index) in content" :key="index">
+    <template v-for="(item, index) in formattedContent" :key="index">
         <BardText
             v-if="item.type === 'paragraph'"
             class="mb-4"

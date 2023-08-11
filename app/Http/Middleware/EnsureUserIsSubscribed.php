@@ -15,7 +15,6 @@ class EnsureUserIsSubscribed
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         if($request->user()->super !== 1){
             if ($request->user() && ! $request->user()->subscribed('Essential')) {
                 return redirect(route('onboard.payment'));
