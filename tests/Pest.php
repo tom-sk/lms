@@ -11,6 +11,8 @@
 |
 */
 
+use App\Models\User;
+
 uses(
     Tests\TestCase::class,
      Illuminate\Foundation\Testing\RefreshDatabase::class,
@@ -45,5 +47,16 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+// tests/Pest.php or tests/Helpers.php
+function UserWithSubscription(): object
+{
+    $user = User::factory([
+        'name' => fake()->name(),
+        'email' => fake()->email(),
+    ])->withSubscription('price_1NZI5HBmxT5gIh6ph91MRYo8')->create();
+
+    return  $user;
 }
 

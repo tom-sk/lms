@@ -25,11 +25,9 @@ test('user can register', function () {
             'password' => 'password',
             'password_confirmation' => 'password',
         ])
-        ->assertOk()
-        ->assertInertia(
-            fn (AssertableInertia $page) => $page
-                ->component('Dashboard')
-                ->has('errors')
-                ->where('errors', [])
-        );
+        ->assertOk();
+
+    $this->get(route('dashboard'))
+        ->assertStatus(302)
+        ->assertRedirect('/billing');;
 });

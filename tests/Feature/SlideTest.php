@@ -20,10 +20,7 @@ test('User can complete a slide', function () {
         'title' => 'Topic 1',
     ]);
 
-    $user = User::create([
-        'name' => fake()->name(),
-        'email' => fake()->email(),
-    ]);
+    $user = UserWithSubscription();
 
     $this->actingAs($user)
         ->followingRedirects()

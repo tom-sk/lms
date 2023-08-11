@@ -28,12 +28,6 @@ use Illuminate\Support\Facades\Route;
 // Webhooks
 Route::stripeWebhooks('/webhook');
 
-
-Route::get('/billing-portal', function (Request $request) {
-    return auth()->user()->redirectToBillingPortal(route('profile.edit'));
-})->name('billing-portal');
-
-
 // Public onboarding routes
 Route::get('/onboard', OnboardController::class)->name('onboard');
 Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.create');
@@ -54,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'subscribed'])->group(function () {
 //
     Route::get('/sub-checkout', SubCheckoutController::class)->name('sub-checkout');
     Route::get('/sub-checkout/success', [SubCheckoutController::class, 'success'])->name('sub-checkout.success');

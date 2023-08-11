@@ -68,7 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 //        TODO: change this to the spark middleware when going live
-//        'subscribed' => VerifyBillableIsSubscribed::class
-        'subscribed' => \App\Http\Middleware\EnsureUserIsSubscribed::class,
+        'subscribed' => VerifyBillableIsSubscribed::class
+//        'subscribed' => \App\Http\Middleware\EnsureUserIsSubscribed::class,
     ];
 }
