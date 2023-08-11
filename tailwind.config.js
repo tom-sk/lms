@@ -1,5 +1,6 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -33,9 +34,7 @@ export default {
                     200: "#AB47BC",
                     300: "#692169",
                 },
-                black: {
-                    default: "#333",
-                },
+                black: "#333",
                 red: {
                     300: "#e52629",
                 },

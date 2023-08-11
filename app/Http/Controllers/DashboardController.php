@@ -24,6 +24,7 @@ class DashboardController extends Controller
 
         $modules->each(function ($module) use ($userModules) {
             $module['enrolled'] = $userModules->contains($module);
+            $module['progress'] = $module->progress();
         });
 
         return Inertia::render('Dashboard', [

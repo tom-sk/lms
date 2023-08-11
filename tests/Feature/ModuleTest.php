@@ -10,10 +10,7 @@ test('User can enrole in module', function () {
         'title' => 'Module 1',
     ]);
 
-    $user = User::create([
-        'name' => fake()->name(),
-        'email' => fake()->email(),
-    ]);
+    $user = UserWithSubscription();
 
     $this->actingAs($user)
         ->followingRedirects()

@@ -28,12 +28,6 @@ use Illuminate\Support\Facades\Route;
 // Webhooks
 Route::stripeWebhooks('/webhook');
 
-
-Route::get('/billing-portal', function (Request $request) {
-    return auth()->user()->redirectToBillingPortal(route('profile.edit'));
-})->name('billing-portal');
-
-
 // Public onboarding routes
 Route::get('/onboard', OnboardController::class)->name('onboard');
 Route::post('/onboard', [OnboardController::class, 'create'])->name('onboard.create');

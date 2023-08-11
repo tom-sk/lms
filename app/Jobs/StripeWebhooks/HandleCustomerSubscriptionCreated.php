@@ -25,6 +25,7 @@ class HandleCustomerSubscriptionCreated implements ShouldQueue
 
     public function handle()
     {
+        /** @phpstan-ignore-next-line */
         $stripeObject = Event::constructFrom($this->webhookCall->payload)->data?->object;
 
         $user = User::where('stripe_id', $stripeObject->customer)->first();
@@ -53,6 +54,7 @@ class HandleCustomerSubscriptionCreated implements ShouldQueue
                 ]);
 
                 foreach ($data['items']['data'] as $item) {
+                    /** @phpstan-ignore-next-line */
                     $subscription->items()->create([
                         'stripe_id' => $item['id'],
                         'stripe_product' => $item['price']['product'],

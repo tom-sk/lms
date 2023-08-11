@@ -26,6 +26,8 @@ function submit(id) {
                     {{ module.title }}
                 </p>
 
+                <span v-if="module.progress > 0"> {{ module.progress }}%</span>
+
                 <form
                     v-if="!module.enrolled"
                     @submit.prevent="submit(module.id)"
@@ -42,7 +44,8 @@ function submit(id) {
                         type="button"
                         class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        Start
+                        <span v-if="module.progress > 0">Continue</span>
+                        <span v-else>Start</span>
                     </button>
                 </Link>
             </div>

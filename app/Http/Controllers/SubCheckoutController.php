@@ -20,7 +20,7 @@ class SubCheckoutController extends Controller
                 'success_url' => route('onboard.questions.step-one'),
                 'cancel_url' => route('sub-checkout.cancel', [], true),
             ]);
-
+        /** @phpstan-ignore-next-line */
         return response()->json(['url' => $session->url]);
     }
 

@@ -36,10 +36,7 @@ test('Question can have answers', function () {
         ]
     ];
 
-    $user = User::create([
-        'name' => fake()->name(),
-        'email' => fake()->email(),
-    ]);
+    $user = UserWithSubscription();
 
     $this->actingAs($user)
         ->followingRedirects()
