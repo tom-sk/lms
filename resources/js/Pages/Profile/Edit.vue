@@ -5,6 +5,7 @@ import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
 import { Head } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import PurchasedAsset from "@/Pages/Product/PurchasedAsset.vue";
 
 defineProps({
     mustVerifyEmail: {
@@ -12,6 +13,9 @@ defineProps({
     },
     status: {
         type: String,
+    },
+    products: {
+        type: Array,
     },
 });
 </script>
@@ -38,6 +42,13 @@ defineProps({
 
                 <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
                     <UpdatePasswordForm class="max-w-xl" />
+                </div>
+
+                <div
+                    v-if="products.length > 0"
+                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                >
+                    <PurchasedAsset :products="products" />
                 </div>
 
                 <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">

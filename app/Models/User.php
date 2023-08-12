@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Onboard\Answer;
+use Archetype\Endpoints\Laravel\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -88,8 +89,8 @@ class User extends Authenticatable
         })->toArray();
     }
 
-    public function orders(): MorphOne
+    public function orders(): HasMany
     {
-        return $this->morphOne(Order::class, 'customer');
+        return $this->hasMany(Order::class, 'customer_id');
     }
 }
