@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78c0238f3059ef666602375d774e3264",
+    "content-hash": "08206b39d5d028adcb98f3e388cd3ad5",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -2130,6 +2130,63 @@
                 "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
             },
             "time": "2022-04-13T08:02:27+00:00"
+        },
+        {
+            "name": "label84/laravel-active-campaign",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Label84/laravel-active-campaign.git",
+                "reference": "c5728c0c0575d4cf667b31060e91633b689679fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Label84/laravel-active-campaign/zipball/c5728c0c0575d4cf667b31060e91633b689679fe",
+                "reference": "c5728c0c0575d4cf667b31060e91633b689679fe",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.0|^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Label84\\ActiveCampaign\\ActiveCampaignServiceProvider"
+                    ],
+                    "aliases": {
+                        "ActiveCampaign": "Label84\\ActiveCampaign\\Facades\\ActiveCampaign"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Label84\\ActiveCampaign\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Label84",
+                    "email": "info@label84.com"
+                }
+            ],
+            "description": "Add Active Campaign to your Laravel application.",
+            "support": {
+                "issues": "https://github.com/Label84/laravel-active-campaign/issues",
+                "source": "https://github.com/Label84/laravel-active-campaign/tree/v1.2.1"
+            },
+            "time": "2023-05-05T14:50:14+00:00"
         },
         {
             "name": "laragraph/utils",
