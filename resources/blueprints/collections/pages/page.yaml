@@ -56,6 +56,35 @@ tabs:
                             instructions_position: above
                             visibility: visible
                             hide_display: false
+                    blog:
+                      display: Blog
+                      instructions: null
+                      icon: content-book-open
+                      fields:
+                        -
+                          handle: header
+                          field:
+                            input_type: text
+                            antlers: false
+                            type: text
+                            display: Header
+                            icon: text
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
+                        -
+                          handle: sub_header
+                          field:
+                            input_type: text
+                            antlers: false
+                            type: text
+                            display: 'Sub Header'
+                            icon: text
+                            listable: hidden
+                            instructions_position: above
+                            visibility: visible
+                            hide_display: false
               type: replicator
               display: 'Flexible Content'
               icon: replicator

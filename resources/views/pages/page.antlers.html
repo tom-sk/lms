@@ -2,4 +2,8 @@
     {{ if type === 'hero'}}
         {{ partial:components/hero :header="hero_header" :content="hero_content"}}
     {{/if}}
+
+    {{ if type === 'blog'}}
+        {{ partial:components/blog }}
+    {{/if}}
 {{ /flexible_content }}
