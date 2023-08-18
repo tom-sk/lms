@@ -1,0 +1,5 @@
+title: 'App Pages'
+revisions: false
+date_behavior:
+  past: public
+  future: private

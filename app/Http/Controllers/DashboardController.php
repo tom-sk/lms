@@ -6,6 +6,8 @@ use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Statamic\Facades\Entry;
+use Label84\ActiveCampaign\ActiveCampaign;
 
 class DashboardController extends Controller
 {
@@ -17,6 +19,12 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+
+        $data = Entry::query()
+            ->where('collection', 'app_pages')
+            ->where('slug', 'dashboard')
+            ->first();
+
         $user = Auth::user();
 
         $modules = Module::all();
@@ -25,10 +33,12 @@ class DashboardController extends Controller
         $modules->each(function ($module) use ($userModules) {
             $module['enrolled'] = $userModules->contains($module);
             $module['progress'] = $module->progress();
+            $module['topics'] = $module->topics()->get();
         });
 
         return Inertia::render('Dashboard', [
-            'modules' => $modules
+            'modules' => $modules,
+            'content' => $data->content
         ]);
 
 //        ->with(['flash.success' => 'Subscription Created!!']);

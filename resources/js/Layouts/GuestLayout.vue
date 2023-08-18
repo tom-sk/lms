@@ -1,8 +1,10 @@
 <script setup>
 import GuestNav from "@/Components/nav/GuestNav.vue";
+import AppNav from "@/Components/nav/AppNav.vue";
 </script>
 <template>
-    <GuestNav />
+    <AppNav v-if="$page.props.auth.user !== null" />
+    <GuestNav v-else />
     <div
         class="flex min-h-screen flex-col items-center bg-gray-200 pt-6 sm:justify-center sm:pt-0"
     >

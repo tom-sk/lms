@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Label84\ActiveCampaign\Facades\ActiveCampaign;
 use Statamic\Facades\Entry;
 
 class OnboardController extends Controller
@@ -62,6 +63,17 @@ class OnboardController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
+        ]);
+
+
+
+//        https://github.com/Label84/laravel-active-campaign
+
+
+        ActiveCampaign::contacts()->sync($request->email, [
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'phone' => '555-555-5555',
         ]);
 
         Auth::login($user);
