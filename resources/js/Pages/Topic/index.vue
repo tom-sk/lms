@@ -15,6 +15,7 @@ import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
 import VimeoPlayer from "@/Components/video/VimeoPlayer.vue";
 import VideoSlider from "@/Components/video/VideoSlider.vue";
+import ResourceSlider from "@/Components/resources/ResourceSlider.vue";
 
 const props = defineProps({
     module: {
@@ -42,6 +43,11 @@ const props = defineProps({
         required: true,
     },
     videos: {
+        type: Array,
+        required: false,
+        default: () => [],
+    },
+    resources: {
         type: Array,
         required: false,
         default: () => [],
@@ -107,6 +113,8 @@ onBeforeMount(() => {
                     </div>
 
                     <VideoSlider :videos="videos" @set-video="setVideo" />
+
+                    <ResourceSlider :resources="resources" />
                 </div>
             </div>
         </div>

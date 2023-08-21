@@ -8,7 +8,7 @@ import {
 
 const emit = defineEmits(["setVideo"]);
 defineProps({
-    videos: {
+    resources: {
         type: Array,
         required: true,
     },
@@ -49,13 +49,13 @@ const setVideo = (video) => {
                 <div class="w-full">
                     <Carousel v-bind="settings" v-model="currentSlide">
                         <Slide
-                            v-for="video in videos"
+                            v-for="video in resources"
                             :key="video.id"
                             class="h-32"
                         >
                             <div class="p-4" @click="setVideo(video)">
                                 <img
-                                    :src="'/storage/' + video.thumbnail"
+                                    src="https://picsum.photos/200/300"
                                     class="cursor-pointer hover:opacity-75"
                                 />
                             </div>
