@@ -1,6 +1,5 @@
 <nav class="flex bg-white">
     <div class="max-w-7xl mx-auto flex justify-between w-full">
-
         <div class="flex items-center">
             <div class="w-20 h-8">
                 <img class="w-full h-auto" src="{{ site_identity:site_logo }}" alt="">
@@ -21,13 +20,22 @@
             </ul>
         </div>
 
+
         <ul class="flex p-4 items-center justify-center space-x-4">
-            <li>
-                {{ partial:components/nav-link url="/login" text="Login" }}
-            </li>
-            <li>
-                {{ partial:components/nav-link url="/register" text="Register" }}
-            </li>
+            {{ if logged_in }}
+                <li>
+                    {{ partial:components/nav-link url="/dashboard" text="Dashboard" }}
+                </li>
+
+                {{ else}}
+                <li>
+                    {{ partial:components/nav-link url="/login" text="Login" }}
+                </li>
+                <li>
+                    {{ partial:components/nav-link url="/register" text="Register" }}
+                </li>
+            {{ /if }}
+
         </ul>
     </div>
 </nav>

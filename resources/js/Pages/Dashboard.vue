@@ -8,6 +8,10 @@ defineProps({
         type: Array,
         required: true,
     },
+    content: {
+        type: String,
+        required: true,
+    },
 });
 </script>
 
@@ -19,6 +23,9 @@ defineProps({
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
+                        <div class="mb-12" v-html="content" />
+
+                        <h4 class="mb-8 text-xl font-bold">Modules</h4>
                         <ModuleList :modules="modules" />
                     </div>
                 </div>
