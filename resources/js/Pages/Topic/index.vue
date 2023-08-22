@@ -88,7 +88,7 @@ onBeforeMount(() => {
                         :slides="topicSlides"
                     />
                 </div>
-                <div class="h-screen overflow-auto pb-52 pr-4 pt-4">
+                <div class="h-screen overflow-auto pb-48 pr-4 pt-4">
                     <div class="mb-12">
                         <VideoSlider :videos="videos" />
                     </div>

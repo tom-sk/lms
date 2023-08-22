@@ -13,7 +13,7 @@ class Resource extends Model
     use HasRunwayResource;
 
     protected $fillable = ['title', 'type', 'content'];
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at', 'pivot'];
 
 
     public function topics(): BelongsToMany
