@@ -12,7 +12,7 @@ import TopicBreadCrumbs from "@/Components/topics/TopicBreadCrumbs.vue";
             <TopicBreadCrumbs />
 
             <!-- Page Content -->
-            <main class="flex h-full grow">
+            <main>
                 <slot />
             </main>
         </div>

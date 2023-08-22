@@ -66,9 +66,9 @@ onBeforeMount(() => {
 <template>
     <Head :title="'Topic ' + topic.id" />
 
-    <div class="flex w-full flex-col items-stretch bg-gray-50 lg:flex-row">
+    <div class="flex h-topic flex-col bg-gray-50 lg:flex-row">
         <TopicSlideMobileNav :topics="topics" :module="module" />
-        <div class="hidden h-full lg:block lg:w-1/5">
+        <div class="hidden lg:block lg:w-1/5">
             <TopicSideNav
                 :topic="topic"
                 :topics="topics"
@@ -79,7 +79,7 @@ onBeforeMount(() => {
             />
         </div>
 
-        <div class="mr-4 h-full lg:w-4/5">
+        <div class="overflow-hidden lg:w-4/5">
             <div class="grid grid-cols-2 xl:pl-0">
                 <div class="px-4 py-10 sm:px-6 lg:px-4 lg:py-6">
                     <SlideItem
@@ -88,12 +88,15 @@ onBeforeMount(() => {
                         :slides="topicSlides"
                     />
                 </div>
-                <div class="pb-12 pt-4">
+                <div class="h-screen overflow-auto pb-52 pr-4 pt-4">
                     <div class="mb-12">
                         <VideoSlider :videos="videos" />
                     </div>
 
-                    <ResourceSlider :resources="resources" />
+                    <ResourceSlider
+                        v-if="resources.length"
+                        :resources="resources"
+                    />
                 </div>
             </div>
         </div>
