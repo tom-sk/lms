@@ -49,7 +49,6 @@ tabs:
               resource: resource
               create: true
               reorderable: true
-              order_column: sort_order
               type: has_many
               display: Resources
               icon: has_many
@@ -57,3 +56,12 @@ tabs:
               instructions_position: above
               visibility: visible
               hide_display: false
+  sidebar:
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true

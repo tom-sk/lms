@@ -5,6 +5,7 @@ namespace App\Models;
 use DoubleThreeDigital\Runway\Traits\HasRunwayResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Resource extends Model
 {
@@ -12,5 +13,11 @@ class Resource extends Model
     use HasRunwayResource;
 
     protected $fillable = ['title', 'type', 'content'];
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at', 'pivot'];
+
+
+    public function topics(): BelongsToMany
+    {
+        return $this->belongsToMany(Topic::class);
+    }
 }

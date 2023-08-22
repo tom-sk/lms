@@ -1,6 +1,5 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
-const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -65,6 +64,9 @@ export default {
                     // 300: "#1ea69b",
                     // 500: "#0B5145",
                 },
+            },
+            height: {
+                topic: "calc(100vh - 117px)",
             },
         },
     },

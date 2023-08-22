@@ -33,5 +33,4 @@ class Slide extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
 }

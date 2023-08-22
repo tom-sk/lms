@@ -30,9 +30,14 @@ class Topic extends Model
         return $this->belongsToMany(Module::class);
     }
 
+    public function resources(): BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class);
+    }
+
     public function slides(): HasMany
     {
-        return $this->hasMany(Slide::class)->orderBy('sort_order');;
+        return $this->hasMany(Slide::class)->orderBy('sort_order');
     }
 
     public function totalSlides()
