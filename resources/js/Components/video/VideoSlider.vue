@@ -1,75 +1,33 @@
 <script setup>
-import { Carousel, Slide } from "vue3-carousel";
+import SliderContainer from "@/Components/SliderContainer.vue";
+import VimeoPlayer from "@/Components/video/VimeoPlayer.vue";
 import { ref } from "vue";
-import {
-    ChevronLeftIcon,
-    ChevronRightIcon,
-} from "@heroicons/vue/20/solid/index.js";
-
-const emit = defineEmits(["setVideo"]);
-defineProps({
+const props = defineProps({
     videos: {
         type: Array,
         required: true,
     },
 });
 
-const settings = {
-    itemsToShow: 2,
-    snapAlign: "start",
-};
-
-const currentSlide = ref(0);
-
-const next = () => {
-    currentSlide.value++;
-};
-
-const prev = () => {
-    if (currentSlide.value === 0) return;
-    currentSlide.value--;
-};
+const activeVideo = ref(props.videos[0]);
+const image = "/storage/" + activeVideo.value.thumbnail;
 
 const setVideo = (video) => {
-    emit("setVideo", video);
+    activeVideo.value = video;
 };
 </script>
 
 <template>
-    <div class="flex max-w-6xl flex-col justify-center">
-        <div class="">
-            <div class="flex w-full items-center">
-                <div class="w-12">
-                    <ChevronLeftIcon
-                        class="w-12 cursor-pointer"
-                        @click="prev"
-                    />
-                </div>
-
-                <div class="w-full">
-                    <Carousel v-bind="settings" v-model="currentSlide">
-                        <Slide
-                            v-for="video in videos"
-                            :key="video.id"
-                            class="h-32"
-                        >
-                            <div class="p-4" @click="setVideo(video)">
-                                <img
-                                    :src="'/storage/' + video.thumbnail"
-                                    class="cursor-pointer hover:opacity-75"
-                                />
-                            </div>
-                        </Slide>
-                    </Carousel>
-                </div>
-
-                <div class="w-12">
-                    <ChevronRightIcon
-                        class="w-12 cursor-pointer"
-                        @click="next"
-                    />
-                </div>
-            </div>
+    <div class="mb-8 rounded-2xl bg-white p-4">
+        <div
+            class="bg-cover bg-center"
+            :style="{
+                backgroundImage: 'url(' + image + ')',
+            }"
+        >
+            <VimeoPlayer class="w-full" :video-url="activeVideo.url" />
         </div>
     </div>
+
+    <SliderContainer :items="videos" @set-item="setVideo" />
 </template>

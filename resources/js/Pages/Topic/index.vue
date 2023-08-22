@@ -13,7 +13,6 @@ import { Head } from "@inertiajs/vue3";
 import SlideItem from "@/Components/slide/SlideItem.vue";
 import TopicSideNav from "@/Components/TopicSideNav.vue";
 import TopicSlideMobileNav from "@/Components/TopicSlideMobileNav.vue";
-import VimeoPlayer from "@/Components/video/VimeoPlayer.vue";
 import VideoSlider from "@/Components/video/VideoSlider.vue";
 import ResourceSlider from "@/Components/resources/ResourceSlider.vue";
 
@@ -54,14 +53,6 @@ const props = defineProps({
     },
 });
 
-const activeVideo = ref(props.videos[0]);
-
-const setVideo = (video) => {
-    activeVideo.value = video;
-};
-
-const image = "/storage/" + activeVideo.value.thumbnail;
-
 onBeforeMount(() => {
     setAllSlides(props.slides);
     setSlide(props.slide.id);
@@ -88,7 +79,7 @@ onBeforeMount(() => {
             />
         </div>
 
-        <div class="h-full lg:w-4/5">
+        <div class="mr-4 h-full lg:w-4/5">
             <div class="grid grid-cols-2 xl:pl-0">
                 <div class="px-4 py-10 sm:px-6 lg:px-4 lg:py-6">
                     <SlideItem
@@ -97,22 +88,10 @@ onBeforeMount(() => {
                         :slides="topicSlides"
                     />
                 </div>
-                <div class="pt-4">
-                    <div class="mb-8 rounded-2xl bg-white p-4">
-                        <div
-                            class="bg-cover bg-center"
-                            :style="{
-                                backgroundImage: 'url(' + image + ')',
-                            }"
-                        >
-                            <VimeoPlayer
-                                class="w-full"
-                                :video-url="activeVideo.url"
-                            />
-                        </div>
+                <div class="pb-12 pt-4">
+                    <div class="mb-12">
+                        <VideoSlider :videos="videos" />
                     </div>
-
-                    <VideoSlider :videos="videos" @set-video="setVideo" />
 
                     <ResourceSlider :resources="resources" />
                 </div>
