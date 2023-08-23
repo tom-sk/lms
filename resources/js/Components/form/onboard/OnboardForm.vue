@@ -20,6 +20,14 @@ const props = defineProps({
         default: "",
         required: true,
     },
+    buttonText: {
+        type: String,
+        default: "next",
+    },
+    reset: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 const form = useForm({ formData: [] });
@@ -30,7 +38,9 @@ const submit = () => {
     form.post(props.postRoute, {
         preserveScroll: true,
         onSuccess: () => {
-            form.reset("formData");
+            if (props.reset) {
+                form.reset("formData");
+            }
         },
     });
 };
@@ -71,7 +81,7 @@ onBeforeMount(() => {
 
 <template>
     <div class="gap-4">
-        <div>
+        <div class="space-y-12">
             <div
                 v-for="(question, index) in questions"
                 :key="question.id"
@@ -88,6 +98,7 @@ onBeforeMount(() => {
                 <div v-if="question.type === 'mutliselect'" :key="question.id">
                     <CheckBoxGroup
                         v-model="form.formData[index]['options_answer']"
+                        :label="question.title"
                         :options="question.options"
                     />
 
@@ -106,7 +117,7 @@ onBeforeMount(() => {
                 :loading="form.processing"
                 @click="submit"
             >
-                Next
+                {{ buttonText }}
             </PrimaryButton>
         </div>
     </div>

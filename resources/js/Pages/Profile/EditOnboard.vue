@@ -1,17 +1,17 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import DeleteUserForm from "./Partials/DeleteUserForm.vue";
-import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
-import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
 import { Head } from "@inertiajs/vue3";
 import ProfileNav from "@/Pages/Profile/Partials/ProfileNav.vue";
+import OnboardForm from "@/Components/form/onboard/OnboardForm.vue";
 
 defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
+    answers: {
+        type: Array,
+        default: () => [],
     },
-    status: {
-        type: String,
+    questions: {
+        type: Array,
+        default: () => [],
     },
 });
 </script>
@@ -37,19 +37,16 @@ defineProps({
                 </div>
                 <div class="col-span-3 space-y-4">
                     <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdateProfileInformationForm
-                            :must-verify-email="mustVerifyEmail"
-                            :status="status"
-                            class="max-w-xl"
+                        <h2 class="mb-12 text-2xl font-bold">
+                            Manage Onboarding Questions
+                        </h2>
+                        <OnboardForm
+                            :reset="false"
+                            :post-route="route('profile.onboard.update')"
+                            :questions="questions"
+                            :answers="answers"
+                            button-text="Update"
                         />
-                    </div>
-
-                    <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdatePasswordForm class="max-w-xl" />
-                    </div>
-
-                    <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <DeleteUserForm class="max-w-xl" />
                     </div>
                 </div>
             </div>

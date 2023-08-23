@@ -29,7 +29,7 @@ onMounted(() => {
 
 <template>
     <div
-        class="absolute bottom-0 left-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+        class="fixed bottom-0 left-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 transform"
     >
         <TransitionRoot
             :show="isShowing"
