@@ -7,6 +7,8 @@ use App\Http\Controllers\Onboard\OnboardController;
 use App\Http\Controllers\Onboard\OnboardPaymentController;
 use App\Http\Controllers\Onboard\QuestionsStepOneController;
 use App\Http\Controllers\Onboard\QuestionsStepTwoController;
+use App\Http\Controllers\ProfileOnboardController;
+use App\Http\Controllers\ProfileProductsController;
 use App\Http\Controllers\SingleProductController;
 use App\Http\Controllers\SubCheckoutController;
 use App\Http\Controllers\SubscriptionPaymentController;
@@ -63,6 +65,9 @@ Route::middleware(['auth', 'subscribed'])->group(function () {
 //    Dashboard
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/products', [ProfileProductsController::class, 'edit'])->name('profile.products');
+    Route::get('/profile/onboard', [ProfileOnboardController::class, 'edit'])->name('profile.onboard.edit');
+    Route::post('/profile/onboard', [ProfileOnboardController::class, 'store'])->name('profile.onboard.update');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/enrol/{module}', [ModuleController::class, 'update'])->name('module.enrol');

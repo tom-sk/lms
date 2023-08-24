@@ -25,7 +25,5 @@ class AnswerService
                 'value' => json_encode($answerValue)
             ]);
         }
-
-        return to_route('onboard.questions.step-two');
     }
 }
