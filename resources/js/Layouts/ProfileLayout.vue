@@ -21,7 +21,7 @@ import ProfileNav from "@/Pages/Profile/Partials/ProfileNav.vue";
                 <div class="grid grid-cols-4 gap-4">
                     <div class="col-span-1">
                         <div
-                            class="sticky top-0 bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                            class="sticky top-4 bg-white p-4 shadow sm:rounded-lg sm:p-8"
                         >
                             <ProfileNav />
                         </div>
